@@ -1,4 +1,4 @@
-pymemwiper
+memwiper
 ==========
 
 Wipe, scrub and make forget the contens of that string that have
