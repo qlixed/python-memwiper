@@ -13,7 +13,9 @@ matrix:
         - os: osx
           language: generic
 
-install: pip install tox
+install: 
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip install tox; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]];  then pip3 install tox; fi
 
 script: tox
 
