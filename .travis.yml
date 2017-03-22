@@ -1,10 +1,7 @@
 language: python
-python: 3
-env:
-  - TOX_ENV=py3333
+python:
+  - "3.3"
 
-install: 
-  - pip install tox
+install: pip install tox
 
-script: 
-  - tox -e $TOX_ENV
+script: tox
