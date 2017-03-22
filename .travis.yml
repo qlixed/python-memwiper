@@ -1,7 +1,18 @@
 language: python
-python:
-  - "3.3"
+
+matrix:
+    include:
+        - python: "3.3"
+        - python: "nightly"
 
 install: pip install tox
 
 script: tox
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - gcc
+
