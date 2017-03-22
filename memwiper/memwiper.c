@@ -7,7 +7,7 @@ static PyObject *
 memwiper_wipeit(PyObject *self, PyObject *str)
 {
 Py_UNICODE *buffer;
-long buffer_size;
+long buffer_size, i;
 int kind;
 
     /* 
@@ -33,7 +33,7 @@ int kind;
     buffer = PyUnicode_DATA(str);
     kind = PyUnicode_KIND(str);
     buffer_size = (long)PyUnicode_GET_LENGTH(str);
-    for (long i=0;i<=(buffer_size-1);i++)
+    for (i=0;i<=(buffer_size-1);i++)
     {
         PyUnicode_WRITE(kind, buffer, i, (Py_UCS4)0);
     }
