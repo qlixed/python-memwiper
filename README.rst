@@ -174,5 +174,3 @@ So, if you execute the commands mentioned you get::
  #
 
 As you can see the core dump in the core-pos.<pid> file don't contains the sensitive data in the memory dump.
-
-
