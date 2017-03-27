@@ -18,7 +18,8 @@ Why I do this?:
 ===============
 
 All your sensitive information belongs to the memory!
-Well that obvious, I know but is a weird issue to handle in most of the
+
+Well that obvious, I know, but is a weird issue to handle in most of the
 languages that uses garbage collection for memory management and inmutable
 strings, let me show a quick ipython example::
 
@@ -54,10 +55,14 @@ strings, let me show a quick ipython example::
     This is guaranteed to be unique among simultaneously existing objects.
     (CPython uses the object's memory address.)
 
-As you can see there I delete the s1 string, but the s2 points to the same
-string, as you can see in the help showed there id show the memory address of
-the object, so s1 and s2 points to the same memory position. So the del s1 never
-really delete the memory object because the string have another reference to it.
+ In [3]: print(s2)
+ Out[3]: Secret Agent data
+
+I delete the s1 string, but the s2 points to the same string, 
+as you can see in the help showed there id show the memory address of
+the object, so s1 and s2 points to the same memory position.
+
+The del s1 never really delete the memory object because the string have another reference to it.
 
 An Example:
 ===========
