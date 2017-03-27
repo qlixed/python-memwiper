@@ -1,6 +1,7 @@
 memwiper
 ==========
-
+.. image:: https://travis-ci.org/qlixed/memwiper.svg?branch=master
+    :target: https://travis-ci.org/qlixed/memwiper
 Now you can overwrite with 0x0's your inmutable strings without issues.
 
 Platforms Supported:
