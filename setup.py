@@ -18,7 +18,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/qlixed/memwiper/',
 
     # Author details
     author='QliXed - Ezequiel Hector Brizuela',
