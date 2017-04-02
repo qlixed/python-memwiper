@@ -12,12 +12,13 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='memwiper',
     version='0.9.9',
+    zip_safe=True,
 
     description='MemWiper, wipe strings filling them with NULLs',
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/qlixed/memwiper/',
 
     # Author details
     author='QliXed - Ezequiel Hector Brizuela',
@@ -53,12 +54,12 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='security',
+    keywords='security secure-text string-manipulation secure-string',
 
-    # Alternatively, if you want to distribute just a my_module.py, uncomment
-    # this:
-    ext_modules = [
-        Extension('memwiper',
-            sources = ['memwiper/memwiper.c'])
+    packages=["memwiper", ],
+    # Python-C API (external) modules
+    ext_modules=[
+        Extension('memwiper_core', sources=['src/memwiper_core.c']),
+        Extension('memwiper_utils', sources=['src/memwiper_utils.c'])
     ]
 )
