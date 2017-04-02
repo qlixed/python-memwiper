@@ -1,48 +1,10 @@
 #include <Python.h>
 
-static PyObject *MemWiperError;
+static PyObject *MemWiper_UtilsError;
 
 
 static PyObject *
-memwiper_wipeit(PyObject *self, PyObject *str)
-{
-Py_UNICODE *buffer;
-long buffer_size, i;
-int kind;
-
-    /* 
-     * Checking the type to avoid nasty things.
-     */
-    if (!PyUnicode_Check(str))
-    {
-        PyErr_BadArgument();
-        return NULL;
-    }
-
-    /* 
-     * Checking for "readiness"...
-     * Whatever that means.
-     * If not ready, push up an exception.
-     * TODO: Check what "ready" exactly means and the implications
-     */
-    if (PyUnicode_READY(str)){
-        PyErr_SetString(MemWiperError, "Unicode object is not Ready!");
-        return NULL;
-    }
-
-    buffer = PyUnicode_DATA(str);
-    kind = PyUnicode_KIND(str);
-    buffer_size = (long)PyUnicode_GET_LENGTH(str);
-    for (i=0;i<=(buffer_size-1);i++)
-    {
-        PyUnicode_WRITE(kind, buffer, i, (Py_UCS4)0);
-    }
-    return PyUnicode_FromString("");
-}
-
-
-static PyObject *
-memwiper_kind(PyObject *self, PyObject *str)
+memwiper_utils_kind(PyObject *self, PyObject *str)
 {
     int kind;
 
@@ -62,7 +24,7 @@ memwiper_kind(PyObject *self, PyObject *str)
      * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
-        PyErr_SetString(MemWiperError, "Unicode object is not Ready!");
+        PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
         return NULL;
     }
 
@@ -74,7 +36,7 @@ memwiper_kind(PyObject *self, PyObject *str)
 }
 
 static PyObject *
-memwiper_size(PyObject *self, PyObject *str)
+memwiper_utils_size(PyObject *self, PyObject *str)
 {
     int kind;
 
@@ -94,7 +56,7 @@ memwiper_size(PyObject *self, PyObject *str)
      * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
-        PyErr_SetString(MemWiperError, "Unicode object is not Ready!");
+        PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
         return NULL;
     }
 
@@ -104,7 +66,7 @@ memwiper_size(PyObject *self, PyObject *str)
 
 
 static PyObject *
-memwiper_codepoints(PyObject *self, PyObject *str)
+memwiper_utils_codepoints(PyObject *self, PyObject *str)
 {
 
     /* 
@@ -123,7 +85,7 @@ memwiper_codepoints(PyObject *self, PyObject *str)
      * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
-        PyErr_SetString(MemWiperError, "Unicode object is not Ready!");
+        PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
         return NULL;
     }
 
@@ -137,37 +99,35 @@ memwiper_codepoints(PyObject *self, PyObject *str)
 /*
  * Methods of the module declaration
  */
-static PyMethodDef MemWiperMethods[] = {
-    {"wipeit", memwiper_wipeit, METH_O,
-        PyDoc_STR("clear the memory of the string")},
-    {"kind", memwiper_kind, METH_O,
+static PyMethodDef MemWiper_UtilsMethods[] = {
+    {"kind", memwiper_utils_kind, METH_O,
         PyDoc_STR("kind of Unicode string")},
-    {"size", memwiper_size, METH_O,
+    {"size", memwiper_utils_size, METH_O,
         PyDoc_STR("Size of the string")},
-    {"codepoints", memwiper_codepoints, METH_O,
-        PyDoc_STR("Code Points of the Unicode String")},
+    {"codepoints", memwiper_utils_codepoints, METH_O,
+        PyDoc_STR("Code Point of the Unicode String")},
     {NULL, NULL, 0, NULL},
 };
 
 /*
  * Module definition
  */
-static struct PyModuleDef MemWipermodule = {
+static struct PyModuleDef MemWiper_Utilsmodule = {
    PyModuleDef_HEAD_INIT,
-   "memwiper",   /* name of module */
+   "memwiper_utils",   /* name of module */
    NULL, /* module documentation, may be NULL */
    -1,       /* size of per-interpreter state of the module,
                 or -1 if the module keeps state in global variables. */
-   MemWiperMethods
+   MemWiper_UtilsMethods
 };
 
 PyMODINIT_FUNC
-PyInit_memwiper(void)
+PyInit_memwiper_utils(void)
 {
     PyObject *m;
-    MemWiperError = PyErr_NewException("wipeit.error", NULL, NULL);
-    Py_INCREF(MemWiperError);
-    m = PyModule_Create(&MemWipermodule);
-    PyModule_AddObject(m, "error", MemWiperError);
+    MemWiper_UtilsError = PyErr_NewException("memwiper_util.error", NULL, NULL);
+    Py_INCREF(MemWiper_UtilsError);
+    m = PyModule_Create(&MemWiper_Utilsmodule);
+    PyModule_AddObject(m, "error", MemWiper_UtilsError);
     return m;
 }
