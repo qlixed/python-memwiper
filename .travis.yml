@@ -1,31 +1,55 @@
 language: python
-
+sudo: false
 cache: pip
-
+env:
+  global:
+    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+    - SEGFAULT_SIGNALS=all
+  matrix:
+    - TOXENV=check
+    - TOXENV=docs
 matrix:
-    include:
-        - os: linux
-          python: "3.3"
-        - os: linux
-          python: "3.6"
-        - os: linux
-          python: "nightly"
-        - os: osx
-          language: generic
-
-install: 
-    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pip install tox; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]];  then pip3 install tox; fi
-
-script: tox
-
+  include:
+    - python: '3.3'
+      env:
+        - TOXENV=3.3-cover,report,extension-coveralls,coveralls,codecov
+    - python: '3.3'
+      env:
+        - TOXENV=3.3-nocov
+    - python: '3.4'
+      env:
+        - TOXENV=3.4-cover,report,extension-coveralls,coveralls,codecov
+    - python: '3.4'
+      env:
+        - TOXENV=3.4-nocov
+    - python: '3.5'
+      env:
+        - TOXENV=3.5-cover,report,extension-coveralls,coveralls,codecov
+    - python: '3.5'
+      env:
+        - TOXENV=3.5-nocov
+    - python: '3.6'
+      env:
+        - TOXENV=3.6-cover,report,extension-coveralls,coveralls,codecov
+    - python: '3.6'
+      env:
+        - TOXENV=3.6-nocov
 before_install:
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update         ; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install python3; fi
-
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-        packages:
-            - gcc
+  - python --version
+  - uname -a
+  - lsb_release -a
+install:
+  - pip install tox
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - tox --version
+script:
+  - tox -v
+after_failure:
+  - more .tox/log/* | cat
+  - more .tox/*/log/* | cat
+notifications:
+  email:
+    on_success: never
+    on_failure: always
