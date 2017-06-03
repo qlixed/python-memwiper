@@ -108,8 +108,8 @@ Platforms Supported:
 ====================
 
 * Linux   - Main dev platform, tested and working.
-* Mac     - Tested and working, requires more tests. You can check `Issue #2 <https://github.com/qlixed/memwiper/issues/2>`_
-* Windows - Not tested yet. You can check `Issue #1 <https://github.com/qlixed/memwiper/issues/1>`_
+* Mac     - Tested and working, requires more tests. You can check `Issue #2 <https://github.com/qlixed/python-memwiper/issues/2>`_
+* Windows - Not tested yet. You can check `Issue #1 <https://github.com/qlixed/python-memwiper/issues/1>`_
 
 The code is full Python C API, not external libraries used, this will be done to maximize the portability.
-I'm searching help with the Mac and Windows testing, so check the issues and leave a comment if you wanna help!
+{I'm searching help with the Mac and Windows testing, so check the issues and leave a comment if you wanna help!

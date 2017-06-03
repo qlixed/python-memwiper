@@ -118,7 +118,7 @@ Here another classic example: a core dump. For this we make a script,
 coretest.py that you can use to check for yourself, it requires:
 
 * A linux platform, We are tracking options to make this on other platforms on
-  `Issue #6 <https://github.com/qlixed/memwiper/issues/6>`_
+  `Issue #6 <https://github.com/qlixed/python-memwiper/issues/6>`_
 * Any modern gdb version installed.
 
 Here is an example run of coretest.py::
