@@ -61,12 +61,11 @@ def main():
         print("Well, did you write nothing? Or maybe cancel the input?")
         sysexit(-1)
     # Showing the secret:
-    print ('The super secret info is:', sfromfile)
+    print('The super secret info is:', sfromfile)
     # "Decoding" the file:
     s1 = codecs.encode(sfromfile, 'rot_13')
     # Generating pre-core
-    print (
-        "Generating {f}.{pid}:".format(
+    print("Generating {f}.{pid}:".format(
             f=corefn.format(
                 when='pre'),
             pid=mypid))
@@ -77,11 +76,10 @@ def main():
     print ("Now we're going to overwrite the memory,")
     memwiper.wipeit(s1)
     # Generating pos-core
-    print (
-        "Generating {f}.{pid}:".format(
+    print("Generating {f}.{pid}:".format(
             f=corefn.format(
                 when='pos'),
-             pid=mypid))
+            pid=mypid))
     corename = corefn.format(when='pos')
     print(cmd.format(filename=corename, pid=mypid))
     subprocess.run(shlex.split(cmd.format(filename=corename, pid=mypid)))
