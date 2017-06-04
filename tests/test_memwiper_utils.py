@@ -1,4 +1,5 @@
 import pytest
+
 import memwiper.utils as mwutils
 
 UNICODE_KIND = [
