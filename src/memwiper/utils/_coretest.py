@@ -73,7 +73,7 @@ def main():
     corename = corefn.format(when='pre')
     print(cmd.format(filename=corename, pid=mypid))
     subprocess.run(shlex.split(cmd.format(filename=corename, pid=mypid)))
-    print ("Now we're going to overwrite the memory,")
+    print("Now we're going to overwrite the memory,")
     memwiper.wipeit(s1)
     # Generating pos-core
     print("Generating {f}.{pid}:".format(
