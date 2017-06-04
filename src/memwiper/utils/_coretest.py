@@ -40,7 +40,7 @@ def supersecretinfogenerator():
         f.write(srot13)
 
 
-if __name__ == "__main__":
+def main():
     if platform.system().lower() != 'linux':
         print("Sorry, currently this work only on linux.")
         sysexit(-1)
@@ -94,3 +94,7 @@ if __name__ == "__main__":
 The core-pre.{pid} contains the secret, as object was active in memory.
 The core-pos.{pid} don't contains the secret, because we wipeit() from memory.
 """.format(pid=mypid, ssi=s1))
+
+
+if __name__ == "__main__":
+    main()

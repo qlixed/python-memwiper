@@ -32,8 +32,9 @@ def read(*names, **kwargs):
     ).read()
 
 
-# Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini, since that may mess with compiling
-# dependencies (e.g. numpy). Therefore we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
+# Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini,
+# since that may mess with compiling  dependencies (e.g. numpy). Therefore
+# we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
 # deps have been safely installed).
 if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
     os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
@@ -42,9 +43,13 @@ setup(
     name='memwiper',
     version='1.0.0',
     license='BSD',
-    description="Now you can overwrite with 0x0's your inmutable strings without issues",
+    description="Let you overwrite with 0x0's your inmutable strings easily",
     long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
+        re.compile(
+            '^.. start-badges.*^.. end-badges',
+            re.M | re.S).sub(
+            '',
+         read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
     author='QliXed - Ezequiel Hector Brizuela',
@@ -56,30 +61,35 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        # complete classifier list:
+        # http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: Unix',
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
+        'Operating System :: MacOS :: MacOS X',
+        'Programming Language :: C',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy',
-        # uncomment if you test on these interpreters:
-        # 'Programming Language :: Python :: Implementation :: IronPython',
-        # 'Programming Language :: Python :: Implementation :: Jython',
-        # 'Programming Language :: Python :: Implementation :: Stackless',
-        'Topic :: Utilities',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Security',
     ],
+    entry_points={
+        'console_scripts': [
+            'memwiper_coretest = memwiper._coretest:main',
+        ],
+    },
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',
+        'security', 'strings', 'python3', 'cpython'
     ],
     install_requires=[
         # eg: 'aspectlib==1.1.1', 'six>=1.7',
