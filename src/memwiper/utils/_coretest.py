@@ -1,13 +1,15 @@
-import os
-from sys import exit as sysexit
-import shlex
 import codecs
-import shutil
 import getpass
-import platform
-import subprocess
 import multiprocessing
+import os
+import platform
+import shlex
+import shutil
+import subprocess
+from sys import exit as sysexit
+
 import memwiper
+
 """
 coretest.py - An example of the memwiper functionality
 Usage:
