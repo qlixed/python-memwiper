@@ -47,8 +47,10 @@ if __name__ == "__main__":
     for (alias, conf) in matrix.from_file(join(base_path, "setup.cfg")).items():
         python = conf["python_versions"]
         deps = conf["dependencies"]
+        travis_os = conf["travis_os"]
         tox_environments[alias] = {
             "python": "python" + python if "py" not in python else python,
+            "os" : travis_os,
             "deps": deps.split(),
         }
         if "coverage_flags" in conf:
@@ -57,6 +59,9 @@ if __name__ == "__main__":
         if "environment_variables" in conf:
             env_vars = conf["environment_variables"]
             tox_environments[alias].update(env_vars=env_vars.split())
+
+    import pprint
+    pprint.pprint (tox_environments)
 
     for name in os.listdir(join("ci", "templates")):
         with open(join(base_path, name), "w") as fh:

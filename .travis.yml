@@ -13,29 +13,69 @@ env:
 matrix:
   include:
     - python: '3.3'
+      os: linux
       env:
-        - TOXENV=3.3-cover,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.3-cover-linux,report,extension-coveralls,coveralls,codecov
     - python: '3.3'
+      os: osx
       env:
-        - TOXENV=3.3-nocov
+        - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
+    - python: '3.3'
+      os: linux
+      env:
+        - TOXENV=3.3-nocov-linux
+    - python: '3.3'
+      os: osx
+      env:
+        - TOXENV=3.3-nocov-osx
     - python: '3.4'
+      os: linux
       env:
-        - TOXENV=3.4-cover,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
     - python: '3.4'
+      os: osx
       env:
-        - TOXENV=3.4-nocov
+        - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
+    - python: '3.4'
+      os: linux
+      env:
+        - TOXENV=3.4-nocov-linux
+    - python: '3.4'
+      os: osx
+      env:
+        - TOXENV=3.4-nocov-osx
     - python: '3.5'
+      os: linux
       env:
-        - TOXENV=3.5-cover,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.5-cover-linux,report,extension-coveralls,coveralls,codecov
     - python: '3.5'
+      os: osx
       env:
-        - TOXENV=3.5-nocov
+        - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
+    - python: '3.5'
+      os: linux
+      env:
+        - TOXENV=3.5-nocov-linux
+    - python: '3.5'
+      os: osx
+      env:
+        - TOXENV=3.5-nocov-osx
     - python: '3.6'
+      os: linux
       env:
-        - TOXENV=3.6-cover,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.6-cover-linux,report,extension-coveralls,coveralls,codecov
     - python: '3.6'
+      os: osx
       env:
-        - TOXENV=3.6-nocov
+        - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
+    - python: '3.6'
+      os: linux
+      env:
+        - TOXENV=3.6-nocov-linux
+    - python: '3.6'
+      os: osx
+      env:
+        - TOXENV=3.6-nocov-osx
 before_install:
   - python --version
   - uname -a
