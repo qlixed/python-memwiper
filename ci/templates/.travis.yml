@@ -26,14 +26,21 @@ matrix:
 before_install:
   - python --version
   - uname -a
-  - lsb_release -a
-install: |
-    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-
-      brew update;
-      brew install python3;
-  fi
-  pip install tox
+  - |
+      if [[ $TRAVIS_OS_NAME != 'osx' ]];then 
+        lsb_release -a
+      fi
+install: 
+  - |
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
+        brew update
+        brew install pyenv
+        pyenv install $($TOXENV | cut -d"-" -f1)
+        alias python=python3
+        python --version
+        alias pip=pip3
+      fi
+  - pip install tox
   - virtualenv --version
   - easy_install --version
   - pip --version
