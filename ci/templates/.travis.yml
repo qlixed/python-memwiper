@@ -27,16 +27,13 @@ before_install:
   - python --version
   - uname -a
   - lsb_release -a
-install:|
+install: |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 
       brew update;
       brew install python3;
-      pip install tox
-
-  else
-      pip install tox
   fi
+  pip install tox
   - virtualenv --version
   - easy_install --version
   - pip --version
