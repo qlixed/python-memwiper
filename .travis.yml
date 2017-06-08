@@ -92,7 +92,7 @@ install:
         if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
             brew upgrade pyenv
         fi
-        pyenv install $(echo $TOXENV | cut -d"-" -f1)
+        pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
         alias python=python3
         python --version
         alias pip=pip3
