@@ -12,76 +12,84 @@ env:
     - TOXENV=docs
 matrix:
   include:
-    - python: '3.3'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.3-cover-linux,report,extension-coveralls,coveralls,codecov
-    - python: '3.3'
-      os: osx
+    - os: osx
+      python: '3.3'
       env:
         - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
-    - python: '3.3'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.3-nocov-linux
-    - python: '3.3'
-      os: osx
+    - os: osx
+      python: '3.3'
       env:
         - TOXENV=3.3-nocov-osx
-    - python: '3.4'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
-    - python: '3.4'
-      os: osx
+    - os: osx
+      python: '3.4'
       env:
         - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
-    - python: '3.4'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.4-nocov-linux
-    - python: '3.4'
-      os: osx
+    - os: osx
+      python: '3.4'
       env:
         - TOXENV=3.4-nocov-osx
-    - python: '3.5'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.5-cover-linux,report,extension-coveralls,coveralls,codecov
-    - python: '3.5'
-      os: osx
+    - os: osx
+      python: '3.5'
       env:
         - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
-    - python: '3.5'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.5-nocov-linux
-    - python: '3.5'
-      os: osx
+    - os: osx
+      python: '3.5'
       env:
         - TOXENV=3.5-nocov-osx
-    - python: '3.6'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.6-cover-linux,report,extension-coveralls,coveralls,codecov
-    - python: '3.6'
-      os: osx
+    - os: osx
+      python: '3.6'
       env:
         - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
-    - python: '3.6'
-      os: linux
+    - os: linux
+      language: generic
       env:
         - TOXENV=3.6-nocov-linux
-    - python: '3.6'
-      os: osx
+    - os: osx
+      python: '3.6'
       env:
         - TOXENV=3.6-nocov-osx
 before_install:
   - python --version
   - uname -a
   - lsb_release -a
-install:
-  - pip install tox
+install:|
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+
+      brew update;
+      brew install python3;
+      pip install tox
+
+  else
+      pip install tox
+  fi
   - virtualenv --version
   - easy_install --version
   - pip --version
