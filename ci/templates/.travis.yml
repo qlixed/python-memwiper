@@ -33,13 +33,12 @@ before_install:
 install: 
   - |
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
-        echo $TOXENV
-        echo "PYVER: $(echo $TOXENV | cut -d'-' -f1)"
         brew update
         if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
             brew upgrade pyenv
         fi
         pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
+        pyenv local $(echo $TOXENV | cut -d"-" -f1)-dev
         alias python=python3
         python --version
         alias pip=pip3
