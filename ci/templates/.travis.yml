@@ -33,11 +33,10 @@ before_install:
 install: 
   - |
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
+        echo $TOXENV
+        echo "PYVER: $(echo $TOXENV | cut -d'-' -f1)"
         brew update
-        brew outdated --quiet | grep -qx pyenv
-        echo "OUTPUT OF THE PREV VALUE: $?"
-        echo $(brew outdated --quiet | grep -qx pyenv)
-        if [[ $(brew outdated --quiet | grep -qx pyenv) ]];then
+        if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
             brew upgrade pyenv
         fi
         pyenv install $(echo $TOXENV | cut -d"-" -f1)
