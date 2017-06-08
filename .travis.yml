@@ -87,7 +87,10 @@ install:
   - |
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         brew update
-        brew install pyenv
+        brew outdated --quiet | grep -qx pyenv
+        if [[ brew outdated --quiet | grep -qx pyenv ]];then
+            brew upgrade pyenv
+        fi
         pyenv install $($TOXENV | cut -d"-" -f1)
         alias python=python3
         python --version
