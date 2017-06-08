@@ -88,7 +88,9 @@ install:
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         brew update
         brew outdated --quiet | grep -qx pyenv
-        if [[ brew outdated --quiet | grep -qx pyenv ]];then
+        echo "OUTPUT OF THE PREV VALUE: $?"
+        echo $(brew outdated --quiet | grep -qx pyenv)
+        if [[ $(brew outdated --quiet | grep -qx pyenv) ]];then
             brew upgrade pyenv
         fi
         pyenv install $($TOXENV | cut -d"-" -f1)
