@@ -79,7 +79,7 @@ matrix:
 before_install:
   - python --version
   - uname -a
-  - lsb_release -a
+  - if [[ $TRAVIS_OS_NAME != 'osx' ]]; then lsb_release -a;fi
 install: |
   if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
       brew update;
