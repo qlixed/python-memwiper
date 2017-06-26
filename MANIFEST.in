@@ -18,5 +18,5 @@ include README.rst
 
 include tox.ini .travis.yml appveyor.yml
 
-global-exclude *.py[cod] __pycache__ *.so *.dylib .ropeproject
+global-exclude *.py[cod] __pycache__ *.so *.dylib .ropeproject *.bkp
 

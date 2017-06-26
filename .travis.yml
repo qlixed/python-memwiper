@@ -79,10 +79,7 @@ matrix:
 before_install:
   - python --version
   - uname -a
-  - |
-      if [[ $TRAVIS_OS_NAME != 'osx' ]];then 
-        lsb_release -a
-      fi
+  - if [[ $TRAVIS_OS_NAME != 'osx' ]];then lsb_release -a ;fi
 install: 
   - |
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
@@ -90,19 +87,26 @@ install:
         if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
             brew upgrade pyenv
         fi
+      fi
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
         pyenv local $(echo $TOXENV | cut -d"-" -f1)-dev
         export PATH="/Users/travis/.pyenv:$PATH"
         eval "$(pyenv init -)"
+      fi
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         python --version
         python3 --version
         alias python=python3
+      fi
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         python --version
         pip --version
         pip3 --version
         alias pip=pip3
         pip --version
       fi
+
   - pip install tox
   - virtualenv --version
   - easy_install --version
