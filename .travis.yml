@@ -89,7 +89,11 @@ install:
         fi
       fi
   - |
-      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then
+        xcode-select --install
+      fi
+  - |
+      if [[ $TRAVIS_OS_NAME == 'osx' ]];then
         pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
         pyenv local $(echo $TOXENV | cut -d"-" -f1)-dev
         export PATH="/Users/travis/.pyenv:$PATH"
