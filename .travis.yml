@@ -13,76 +13,84 @@ env:
 matrix:
   include:
     - os: linux
-      python: '3.3'
+      python: "3.3"
       env:
         - TOXENV=3.3-cover-linux,report,extension-coveralls,coveralls,codecov
     - os: osx
+      python: "3.3"
       language: generic
       env:
         - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
     - os: linux
-      python: '3.3'
+      python: "3.3"
       env:
         - TOXENV=3.3-nocov-linux
     - os: osx
+      python: "3.3"
       language: generic
       env:
         - TOXENV=3.3-nocov-osx
     - os: linux
-      python: '3.4'
+      python: "3.4"
       env:
         - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
     - os: osx
+      python: "3.4"
       language: generic
       env:
         - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
     - os: linux
-      python: '3.4'
+      python: "3.4"
       env:
         - TOXENV=3.4-nocov-linux
     - os: osx
+      python: "3.4"
       language: generic
       env:
         - TOXENV=3.4-nocov-osx
     - os: linux
-      python: '3.5'
+      python: "3.5"
       env:
         - TOXENV=3.5-cover-linux,report,extension-coveralls,coveralls,codecov
     - os: osx
+      python: "3.5"
       language: generic
       env:
         - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
     - os: linux
-      python: '3.5'
+      python: "3.5"
       env:
         - TOXENV=3.5-nocov-linux
     - os: osx
+      python: "3.5"
       language: generic
       env:
         - TOXENV=3.5-nocov-osx
     - os: linux
-      python: '3.6'
+      python: "3.6"
       env:
         - TOXENV=3.6-cover-linux,report,extension-coveralls,coveralls,codecov
     - os: osx
+      python: "3.6"
       language: generic
       env:
         - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
     - os: linux
-      python: '3.6'
+      python: "3.6"
       env:
         - TOXENV=3.6-nocov-linux
     - os: osx
+      python: "3.6"
       language: generic
       env:
         - TOXENV=3.6-nocov-osx
 before_install:
   - python --version
   - uname -a
-  - if [[ $TRAVIS_OS_NAME != 'osx' ]];then lsb_release -a ;fi
+  - if [[ $TRAVIS_OS_NAME != "osx" ]];then lsb_release -a ;fi
 install: 
   - |
-      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then 
         brew update
         if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
             brew upgrade pyenv
@@ -100,13 +108,9 @@ install:
         python --version
         python3 --version
         alias python=python3
-      fi
   - |
       if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
         python --version
-        pip --version
-        pip3 --version
-        alias pip=pip3
         pip --version
       fi
 
