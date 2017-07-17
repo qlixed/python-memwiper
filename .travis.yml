@@ -97,23 +97,12 @@ install:
         fi
       fi
   - |
-      if [[ $TRAVIS_OS_NAME == 'osx' ]];then
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then
         pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
         pyenv local $(echo $TOXENV | cut -d"-" -f1)-dev
         export PATH="/Users/travis/.pyenv:$PATH"
         eval "$(pyenv init -)"
       fi
-  - |
-      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
-        python --version
-        python3 --version
-        alias python=python3
-  - |
-      if [[ $TRAVIS_OS_NAME == 'osx' ]];then 
-        python --version
-        pip --version
-      fi
-
   - pip install tox
   - virtualenv --version
   - easy_install --version
