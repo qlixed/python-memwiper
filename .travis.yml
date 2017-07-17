@@ -98,8 +98,8 @@ install:
       fi
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then
-        pyenv install $(echo $TOXENV | cut -d"-" -f1)-dev
-        pyenv local $(echo $TOXENV | cut -d"-" -f1)-dev
+        pyenv --debug install $(echo $TOXENV | cut -d"-" -f1)-dev
+        pyenv --debug local $(echo $TOXENV | cut -d"-" -f1)-dev
         export PATH="/Users/travis/.pyenv:$PATH"
         eval "$(pyenv init -)"
       fi
