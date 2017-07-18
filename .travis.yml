@@ -98,6 +98,7 @@ install:
       fi
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then
+        pyenv install --list | grep $(echo $TOXENV | cut -d"-" -f1) | grep -v "-" | tail -1
         set PYENV_BRANCH_LASTEST=$(pyenv install --list | grep $(echo $TOXENV | cut -d"-" -f1) | grep -v "-" | tail -1)
         pyenv --debug install $PYENV_BRANCH_LASTEST
         pyenv local $PYENV_BRANCH_LASTEST
