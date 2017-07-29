@@ -40,6 +40,8 @@ install:
       fi
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then
+        pyenv install --list
+        pyenv install --list | grep "$PYENV_BRANCH"
         set PYENV_BRANCH_LASTEST=$(pyenv install --list | grep "$PYENV_BRANCH" | grep -v "-" | tail -1)
         echo "Going for: $PYENV_BRANCH_LASTEST"
         pyenv --debug install $PYENV_BRANCH_LASTEST
