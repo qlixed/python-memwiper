@@ -1,3 +1,5 @@
+# vim: nospell nofoldenable
+
 language: python
 python:
     "3.4"
@@ -17,9 +19,6 @@ matrix:
       python: "{{ '{0[0]}-5.4'.format(env.split('-')) if env.startswith('pypy') else env.split('-')[0] }}"
       {% if config.os == "osx" %}
       language: generic
-      {% if config.python == "3.6" %}
-      osx_image: xcode8.3
-      {% endif %}
       {% endif %}
       env:
         - TOXENV={{ env }}{% if config.cover %},report,extension-coveralls,coveralls,codecov{% endif -%}
@@ -32,19 +31,18 @@ before_install:
 install: 
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then 
-        brew update
-        if [[ "$(brew outdated --quiet | grep -qx pyenv)" != "" ]];then
-            brew upgrade pyenv
-        fi
+        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+        export PYENV_ROOT="$HOME/.pyenv
+        export PATH="$PYENV_ROOT/bin:$PATH
+        eval $(pyenv init -)
       fi
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then
-        pyenv install --list | grep $(echo $TOXENV | cut -d"-" -f1) | grep -v "-" | tail -1
         set PYENV_BRANCH_LASTEST=$(pyenv install --list | grep $(echo $TOXENV | cut -d"-" -f1) | grep -v "-" | tail -1)
+        echo "Going for: $PYENV_BRANCH_LASTEST"
         pyenv --debug install $PYENV_BRANCH_LASTEST
         pyenv local $PYENV_BRANCH_LASTEST
-        export PATH="/Users/travis/.pyenv:$PATH"
-        eval "$(pyenv init -)"
+        eval "$(pyenv init -)val "$(pyenv init -)"
       fi
   - pip install tox
   - virtualenv --version
