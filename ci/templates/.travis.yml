@@ -42,7 +42,7 @@ install:
         echo "Going for: $PYENV_BRANCH_LASTEST"
         pyenv --debug install $PYENV_BRANCH_LASTEST
         pyenv local $PYENV_BRANCH_LASTEST
-        eval "$(pyenv init -)val "$(pyenv init -)"
+        eval "$(pyenv init -)"
       fi
   - pip install tox
   - virtualenv --version
