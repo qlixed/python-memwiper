@@ -64,6 +64,10 @@ if __name__ == "__main__":
     pprint.pprint (tox_environments)
 
     for name in os.listdir(join("ci", "templates")):
+        if name.endswith(".swp"):
+            print('I think that: {} is a vim backup file, skipping!'.format(
+            name))
+            continue
         with open(join(base_path, name), "w") as fh:
             fh.write(jinja.get_template(name).render(tox_environments=tox_environments))
         print("Wrote {}".format(name))
