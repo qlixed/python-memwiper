@@ -11,6 +11,7 @@ env:
     - SEGFAULT_SIGNALS=all
   matrix:
     - TOXENV=check
+    allow_failures:
     - TOXENV=docs
 matrix:
   include:
@@ -102,7 +103,6 @@ install:
       fi
   - |
       if [[ $TRAVIS_OS_NAME == "osx" ]];then
-        pyenv install --list | grep "$PYENV_BRANCH" | grep -v "-" | tail -1
         export PYENV_BRANCH_LASTEST=$(pyenv install --list | grep "$PYENV_BRANCH" | grep -v "-" | tail -1)
         echo "Going for: $PYENV_BRANCH_LASTEST"
         pyenv install $PYENV_BRANCH_LASTEST

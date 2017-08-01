@@ -12,3 +12,5 @@ parallel = true
 show_missing = true
 precision = 2
 omit = *migrations*
+    # Not part of the normal flow.
+    src/memwiper/utils/_coretest.py
