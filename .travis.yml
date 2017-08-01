@@ -1,3 +1,5 @@
+# vim: nospell nofoldenable
+
 language: python
 python:
     "3.4"
@@ -11,36 +13,103 @@ env:
     - TOXENV=check
     - TOXENV=docs
 matrix:
+  allow_failures:
+    - env: TOXENV=docs
   include:
-    - python: '3.3'
+    - os: linux
+      python: "3.3"
       env:
-        - TOXENV=3.3-cover,report,extension-coveralls,coveralls,codecov
-    - python: '3.3'
+        - TOXENV=3.3-cover-linux,report,extension-coveralls,coveralls,codecov
+    - os: osx
+      python: "3.3"
+      language: generic
       env:
-        - TOXENV=3.3-nocov
-    - python: '3.4'
+        - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
+    - os: linux
+      python: "3.3"
       env:
-        - TOXENV=3.4-cover,report,extension-coveralls,coveralls,codecov
-    - python: '3.4'
+        - TOXENV=3.3-nocov-linux
+    - os: osx
+      python: "3.3"
+      language: generic
       env:
-        - TOXENV=3.4-nocov
-    - python: '3.5'
+        - TOXENV=3.3-nocov-osx
+    - os: linux
+      python: "3.4"
       env:
-        - TOXENV=3.5-cover,report,extension-coveralls,coveralls,codecov
-    - python: '3.5'
+        - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
+    - os: osx
+      python: "3.4"
+      language: generic
       env:
-        - TOXENV=3.5-nocov
-    - python: '3.6'
+        - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
+    - os: linux
+      python: "3.4"
       env:
-        - TOXENV=3.6-cover,report,extension-coveralls,coveralls,codecov
-    - python: '3.6'
+        - TOXENV=3.4-nocov-linux
+    - os: osx
+      python: "3.4"
+      language: generic
       env:
-        - TOXENV=3.6-nocov
+        - TOXENV=3.4-nocov-osx
+    - os: linux
+      python: "3.5"
+      env:
+        - TOXENV=3.5-cover-linux,report,extension-coveralls,coveralls,codecov
+    - os: osx
+      python: "3.5"
+      language: generic
+      env:
+        - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
+    - os: linux
+      python: "3.5"
+      env:
+        - TOXENV=3.5-nocov-linux
+    - os: osx
+      python: "3.5"
+      language: generic
+      env:
+        - TOXENV=3.5-nocov-osx
+    - os: linux
+      python: "3.6"
+      env:
+        - TOXENV=3.6-cover-linux,report,extension-coveralls,coveralls,codecov
+    - os: osx
+      python: "3.6"
+      language: generic
+      env:
+        - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
+    - os: linux
+      python: "3.6"
+      env:
+        - TOXENV=3.6-nocov-linux
+    - os: osx
+      python: "3.6"
+      language: generic
+      env:
+        - TOXENV=3.6-nocov-osx
 before_install:
   - python --version
   - uname -a
-  - lsb_release -a
-install:
+  - if [[ $TRAVIS_OS_NAME != "osx" ]];then lsb_release -a ;fi
+install: 
+  - |
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then 
+        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+        export PYENV_BRANCH=$(echo $TOXENV | cut -d"-" -f1)
+        echo "The Base branch is: $PYENV_BRANCH"
+      fi
+  - |
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then
+        export PYENV_BRANCH_LASTEST=$(pyenv install --list | grep "$PYENV_BRANCH" | grep -v "-" | tail -1)
+        echo "Going for: $PYENV_BRANCH_LASTEST"
+        pyenv install $PYENV_BRANCH_LASTEST
+        pyenv local $PYENV_BRANCH_LASTEST
+        eval "$(pyenv init -)"
+      fi
   - pip install tox
   - virtualenv --version
   - easy_install --version
