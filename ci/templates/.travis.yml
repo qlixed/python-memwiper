@@ -11,9 +11,10 @@ env:
     - SEGFAULT_SIGNALS=all
   matrix:
     - TOXENV=check
+    - TOXENV=docs
 matrix:
   allow_failures:
-    - TOXENV=docs
+    - env: TOXENV=docs
   include:
 {%- for env, config in tox_environments|dictsort %}{{ '' }}
     - os: {{ config.os }}
