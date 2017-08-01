@@ -1,13 +1,15 @@
-import os
-from sys import exit as sysexit
-import shlex
 import codecs
-import shutil
 import getpass
-import platform
-import subprocess
 import multiprocessing
+import os
+import platform
+import shlex
+import shutil
+import subprocess
+from sys import exit as sysexit
+
 import memwiper
+
 """
 coretest.py - An example of the memwiper functionality
 Usage:
@@ -40,7 +42,7 @@ def supersecretinfogenerator():
         f.write(srot13)
 
 
-if __name__ == "__main__":
+def main():
     if platform.system().lower() != 'linux':
         print("Sorry, currently this work only on linux.")
         sysexit(-1)
@@ -61,12 +63,11 @@ if __name__ == "__main__":
         print("Well, did you write nothing? Or maybe cancel the input?")
         sysexit(-1)
     # Showing the secret:
-    print ('The super secret info is:', sfromfile)
+    print('The super secret info is:', sfromfile)
     # "Decoding" the file:
     s1 = codecs.encode(sfromfile, 'rot_13')
     # Generating pre-core
-    print (
-        "Generating {f}.{pid}:".format(
+    print("Generating {f}.{pid}:".format(
             f=corefn.format(
                 when='pre'),
             pid=mypid))
@@ -74,14 +75,13 @@ if __name__ == "__main__":
     corename = corefn.format(when='pre')
     print(cmd.format(filename=corename, pid=mypid))
     subprocess.run(shlex.split(cmd.format(filename=corename, pid=mypid)))
-    print ("Now we're going to overwrite the memory,")
+    print("Now we're going to overwrite the memory,")
     memwiper.wipeit(s1)
     # Generating pos-core
-    print (
-        "Generating {f}.{pid}:".format(
+    print("Generating {f}.{pid}:".format(
             f=corefn.format(
                 when='pos'),
-             pid=mypid))
+            pid=mypid))
     corename = corefn.format(when='pos')
     print(cmd.format(filename=corename, pid=mypid))
     subprocess.run(shlex.split(cmd.format(filename=corename, pid=mypid)))
@@ -94,3 +94,7 @@ if __name__ == "__main__":
 The core-pre.{pid} contains the secret, as object was active in memory.
 The core-pos.{pid} don't contains the secret, because we wipeit() from memory.
 """.format(pid=mypid, ssi=s1))
+
+
+if __name__ == "__main__":
+    main()

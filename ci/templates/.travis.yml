@@ -1,4 +1,8 @@
+# vim: nospell nofoldenable
+
 language: python
+python:
+    "3.4"
 sudo: false
 cache: pip
 env:
@@ -9,9 +13,15 @@ env:
     - TOXENV=check
     - TOXENV=docs
 matrix:
+  allow_failures:
+    - env: TOXENV=docs
   include:
 {%- for env, config in tox_environments|dictsort %}{{ '' }}
-    - python: '{{ '{0[0]}-5.4'.format(env.split('-')) if env.startswith('pypy') else env.split('-')[0] }}'
+    - os: {{ config.os }}
+      python: "{{ '{0[0]}-5.4'.format(env.split('-')) if env.startswith('pypy') else env.split('-')[0] }}"
+      {% if config.os == "osx" %}
+      language: generic
+      {% endif %}
       env:
         - TOXENV={{ env }}{% if config.cover %},report,extension-coveralls,coveralls,codecov{% endif -%}
 {% endfor %}
@@ -19,8 +29,25 @@ matrix:
 before_install:
   - python --version
   - uname -a
-  - lsb_release -a
-install:
+  - if [[ $TRAVIS_OS_NAME != "osx" ]];then lsb_release -a ;fi
+install: 
+  - |
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then 
+        git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+        export PYENV_BRANCH=$(echo $TOXENV | cut -d"-" -f1)
+        echo "The Base branch is: $PYENV_BRANCH"
+      fi
+  - |
+      if [[ $TRAVIS_OS_NAME == "osx" ]];then
+        export PYENV_BRANCH_LASTEST=$(pyenv install --list | grep "$PYENV_BRANCH" | grep -v "-" | tail -1)
+        echo "Going for: $PYENV_BRANCH_LASTEST"
+        pyenv install $PYENV_BRANCH_LASTEST
+        pyenv local $PYENV_BRANCH_LASTEST
+        eval "$(pyenv init -)"
+      fi
   - pip install tox
   - virtualenv --version
   - easy_install --version

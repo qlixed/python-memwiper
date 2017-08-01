@@ -1,5 +1,4 @@
 graft docs
-graft examples
 graft src
 graft ci
 graft tests
@@ -9,6 +8,7 @@ include .coveragerc
 include .cookiecutterrc
 include .editorconfig
 include .isort.cfg
+include .readthedocs.yml
 
 include AUTHORS.rst
 include CHANGELOG.rst
@@ -18,4 +18,8 @@ include README.rst
 
 include tox.ini .travis.yml appveyor.yml
 
-global-exclude *.py[cod] __pycache__ *.so *.dylib
+prune __pycache__ 
+prune .ropeproject
+prune */.ropeproject
+
+global-exclude *.py[cod] *.bkp *.so *.dylib
