@@ -44,15 +44,17 @@ if __name__ == "__main__":
     )
 
     tox_environments = {}
+    print ("Building tox enviroments:")
     for (alias, conf) in matrix.from_file(join(base_path, "setup.cfg")).items():
         python = conf["python_versions"]
         deps = conf["dependencies"]
-        travis_os = conf["travis_os"]
+        ci_os = conf["os"]
         tox_environments[alias] = {
             "python": "python" + python if "py" not in python else python,
-            "os" : travis_os,
+            "os" : ci_os,
             "deps": deps.split(),
         }
+        print ("{}: {} {} {}".format(alias, python, ci_os, str(deps.split())))
         if "coverage_flags" in conf:
             cover = {"false": False, "true": True}[conf["coverage_flags"].lower()]
             tox_environments[alias].update(cover=cover)

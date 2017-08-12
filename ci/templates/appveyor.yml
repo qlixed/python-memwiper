@@ -11,13 +11,14 @@ environment:
       PYTHON_HOME: C:\Python34
       PYTHON_VERSION: '3.4'
       PYTHON_ARCH: '32'
-{% for env, config in tox_environments|dictsort %}{{ '' }}{% if config.python.startswith('python') and config.os == 'linux' %}
-    - TOXENV: '{{ env.replace('linux', 'win32') }}{% if config.cover %},report,codecov{% endif %}'
+{% for env, config in tox_environments|dictsort %}{{ '' }}
+    {% if config.python.startswith('python') and config.os not in ['osx', 'linux'] %}
+    - TOXENV: '{{ env }}{% if config.cover %},report,codecov{% endif %}'
       TOXPYTHON: C:\{{ config.python.replace('.', '').capitalize() }}\python.exe
       PYTHON_HOME: C:\{{ config.python.replace('.', '').capitalize() }}
       PYTHON_VERSION: '{{ config.python[-3:] }}'
       PYTHON_ARCH: '32'
-    - TOXENV: '{{ env.replace('linux', 'win64') }}{% if config.cover %},report,codecov{% endif %}'
+    - TOXENV: '{{ env  }}{% if config.cover %},report,codecov{% endif %}'
       TOXPYTHON: C:\{{ config.python.replace('.', '').capitalize() }}-x64\python.exe
       {%- if config.python != 'python3.5' %}
 
@@ -28,7 +29,8 @@ environment:
       PYTHON_VERSION: '{{ config.python[-3:] }}'
       PYTHON_ARCH: '64'
 
-{% endif %}{% endfor %}
+    {% endif %}
+{% endfor %}
 init:
   - ps: echo $env:TOXENV
   - ps: ls C:\Python*
