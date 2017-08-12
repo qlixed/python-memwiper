@@ -4,7 +4,7 @@ cache:
   - '%LOCALAPPDATA%\pip\Cache'
 image:
     # Uncomment to test on W2k12R2, VS15
-    #- Visual Studio 2015
+    - Visual Studio 2015
     # Test on W2k16, VS17
     - Visual Studio 2017
 environment:
