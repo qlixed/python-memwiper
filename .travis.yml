@@ -25,14 +25,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2015
-      python: "3.3"
-      env:
-        - TOXENV=3.3-cover-win2k12r2,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2017
-      python: "3.3"
-      env:
-        - TOXENV=3.3-cover-win2k16,report,extension-coveralls,coveralls,codecov
+
+
     - os: linux
       python: "3.3"
       env:
@@ -42,14 +36,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.3-nocov-osx
-    - os: Visual-Studio-2015
-      python: "3.3"
-      env:
-        - TOXENV=3.3-nocov-win2k12r2
-    - os: Visual-Studio-2017
-      python: "3.3"
-      env:
-        - TOXENV=3.3-nocov-win2k16
+
+
     - os: linux
       python: "3.4"
       env:
@@ -59,14 +47,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2015
-      python: "3.4"
-      env:
-        - TOXENV=3.4-cover-win2k12r2,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2017
-      python: "3.4"
-      env:
-        - TOXENV=3.4-cover-win2k16,report,extension-coveralls,coveralls,codecov
+
+
     - os: linux
       python: "3.4"
       env:
@@ -76,14 +58,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.4-nocov-osx
-    - os: Visual-Studio-2015
-      python: "3.4"
-      env:
-        - TOXENV=3.4-nocov-win2k12r2
-    - os: Visual-Studio-2017
-      python: "3.4"
-      env:
-        - TOXENV=3.4-nocov-win2k16
+
+
     - os: linux
       python: "3.5"
       env:
@@ -93,14 +69,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2015
-      python: "3.5"
-      env:
-        - TOXENV=3.5-cover-win2k12r2,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2017
-      python: "3.5"
-      env:
-        - TOXENV=3.5-cover-win2k16,report,extension-coveralls,coveralls,codecov
+
+
     - os: linux
       python: "3.5"
       env:
@@ -110,14 +80,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.5-nocov-osx
-    - os: Visual-Studio-2015
-      python: "3.5"
-      env:
-        - TOXENV=3.5-nocov-win2k12r2
-    - os: Visual-Studio-2017
-      python: "3.5"
-      env:
-        - TOXENV=3.5-nocov-win2k16
+
+
     - os: linux
       python: "3.6"
       env:
@@ -127,14 +91,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2015
-      python: "3.6"
-      env:
-        - TOXENV=3.6-cover-win2k12r2,report,extension-coveralls,coveralls,codecov
-    - os: Visual-Studio-2017
-      python: "3.6"
-      env:
-        - TOXENV=3.6-cover-win2k16,report,extension-coveralls,coveralls,codecov
+
+
     - os: linux
       python: "3.6"
       env:
@@ -144,14 +102,8 @@ matrix:
       language: generic
       env:
         - TOXENV=3.6-nocov-osx
-    - os: Visual-Studio-2015
-      python: "3.6"
-      env:
-        - TOXENV=3.6-nocov-win2k12r2
-    - os: Visual-Studio-2017
-      python: "3.6"
-      env:
-        - TOXENV=3.6-nocov-win2k16
+
+
 before_install:
   - python --version
   - uname -a
