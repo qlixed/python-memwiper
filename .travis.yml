@@ -25,6 +25,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
+
     - os: linux
       python: "3.3"
       env:
@@ -34,6 +35,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.3-nocov-osx
+
     - os: linux
       python: "3.4"
       env:
@@ -43,6 +45,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
+
     - os: linux
       python: "3.4"
       env:
@@ -52,6 +55,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.4-nocov-osx
+
     - os: linux
       python: "3.5"
       env:
@@ -61,6 +65,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
+
     - os: linux
       python: "3.5"
       env:
@@ -70,6 +75,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.5-nocov-osx
+
     - os: linux
       python: "3.6"
       env:
@@ -79,6 +85,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
+
     - os: linux
       python: "3.6"
       env:
@@ -88,6 +95,7 @@ matrix:
       language: generic
       env:
         - TOXENV=3.6-nocov-osx
+
 before_install:
   - python --version
   - uname -a
