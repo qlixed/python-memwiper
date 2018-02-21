@@ -1,0 +1,25 @@
+# A json file with specific wide strings to test.
+# The string wide used in Python are:
+# 1, 2 or 4 Byte Wide.
+##
+# There is an extra kind, a Wide Char kind, but
+# AFAIK the Wide Char is only used as representation on
+# the C side of any Python/C API. So we don't test for it.
+
+
+# ByteWidth : Text
+{
+"strings" : {
+	# Text on 1 Byte wide:
+	1 : "'Hello friend!' translated to spanish: '¡Hola amigo!'",
+	# Japanese text using 2 Byte wide unicode simbols
+	2 : "'Hello friend!' translated to japanese: 'こんにちは！'",
+	# Pi definition, uses 4 byte wide unicode simbols
+	4 : "Pi definition: 𝝅=𝑪/𝐝"
+},
+"chars" : {
+	1 : "A",
+	2 : "こ",
+	4 : "𝝅"
+}
+}

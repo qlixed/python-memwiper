@@ -63,3 +63,7 @@ docs/_build
 .bootstrap
 .appveyor.token
 *.bak
+
+# Custom conf
+*valgrind*
+*valgrind*.*
