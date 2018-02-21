@@ -31,12 +31,18 @@ int kind;
 
     buffer = PyUnicode_DATA(str);
     kind = PyUnicode_KIND(str);
+    /*
+     * Overwirte the current str buffer.
+     */
     buffer_size = (long)PyUnicode_GET_LENGTH(str);
     for (i=0;i<=(buffer_size-1);i++)
     {
         PyUnicode_WRITE(kind, buffer, i, (Py_UCS4)0);
     }
-    return PyUnicode_FromString("");
+    /*
+     * Return a new empty string.
+     */
+    return str;
 }
 
 

@@ -8,10 +8,12 @@ UNICODE_KIND = [
     "2 Byte",
     "4 Byte"
 ]
-
-s1 = "'Hello friend!' in spanish: '¡Hola amigo!'"
+# AFAIK the Wide Char is only used as representation on 
+# the C side of any Python/C API. So we don't test for it.
+# Text on 1 Byte wide:
+s1 = "'Hello friend!' translated to spanish: '¡Hola amigo!'"
 # Japanese text using 2 Byte wide unicode simbols
-s2 = "'Hello friend!' in spanish: 'こんにちは！'"
+s2 = "'Hello friend!' translated to japanese: 'こんにちは！'"
 # Pi definition, uses 4 byte wide unicode simbols
 s3 = "Pi definition: 𝝅=𝑪/𝐝"
 
