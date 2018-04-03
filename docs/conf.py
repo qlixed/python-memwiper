@@ -26,7 +26,7 @@ project = u'python-memwiper'
 year = u'2017'
 author = u'QliXed - Ezequiel Hector Brizuela'
 copyright = '{0}, {1}'.format(year, author)
-version = release = u'1.0.0'
+version = release = u'0.8.0-dev'
 
 pygments_style = 'trac'
 templates_path = ['.']

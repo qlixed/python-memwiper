@@ -41,7 +41,7 @@ if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
 
 setup(
     name='memwiper',
-    version='1.0.0',
+    version='0.8.0-dev',
     license='BSD',
     description="Let you overwrite with 0x0's your inmutable strings easily",
     long_description='%s\n%s' % (

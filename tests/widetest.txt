@@ -6,20 +6,20 @@
 # AFAIK the Wide Char is only used as representation on
 # the C side of any Python/C API. So we don't test for it.
 
+# Text on 1 Byte wide:
+# Japanese text using 2 Byte wide unicode simbols
+# Pi definition, uses 4 byte wide unicode simbols
 
 # ByteWidth : Text
 {
 "strings" : {
-	# Text on 1 Byte wide:
-	1 : "'Hello friend!' translated to spanish: '¡Hola amigo!'",
-	# Japanese text using 2 Byte wide unicode simbols
-	2 : "'Hello friend!' translated to japanese: 'こんにちは！'",
-	# Pi definition, uses 4 byte wide unicode simbols
-	4 : "Pi definition: 𝝅=𝑪/𝐝"
+	"1Byte" : "'Hello friend!' translated to spanish: '¡Hola amigo!'",
+	"2Byte" : "'Hello friend!' translated to japanese: 'こんにちは！'",
+	"4Byte" : "Pi definition: 𝝅=𝑪/𝐝"
 },
 "chars" : {
-	1 : "A",
-	2 : "こ",
-	4 : "𝝅"
+	"1Byte" : "A",
+	"2Byte" : "こ",
+	"4Byte" : "𝝅"
 }
 }

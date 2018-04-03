@@ -21,7 +21,6 @@ memwiper_utils_kind(PyObject *self, PyObject *str)
      * Checking for "readiness"...
      * Whatever that means.
      * If not ready, push up an exception.
-     * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
         PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
@@ -53,7 +52,6 @@ memwiper_utils_size(PyObject *self, PyObject *str)
      * Checking for "readiness"...
      * Whatever that means.
      * If not ready, push up an exception.
-     * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
         PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
@@ -82,7 +80,6 @@ memwiper_utils_codepoints(PyObject *self, PyObject *str)
      * Checking for "readiness"...
      * Whatever that means.
      * If not ready, push up an exception.
-     * TODO: Check what "ready" exactly means and the implications
      */
     if (PyUnicode_READY(str)){
         PyErr_SetString(MemWiper_UtilsError, "Unicode object is not Ready!");
