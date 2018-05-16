@@ -39,6 +39,8 @@ def read(*names, **kwargs):
 if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
     os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
 
+os.environ['CFLAGS'] = '-DMEMWIPER_DEBUG=1'
+
 setup(
     name='memwiper',
     version='0.8.0-dev',

@@ -2,6 +2,15 @@ import pytest
 import memwiper
 
 
+def make_str(the_char, length):
+    if memwiper.utils.kind(the_char) == "1 Byte":
+        scmp = "\U000000ff"*length
+    if memwiper.utils.kind(the_char) == "2 Byte":
+        scmp = "\U0000ffff"*length
+    if memwiper.utils.kind(the_char) == "4 Byte":
+        scmp = "\U000fffff"*length
+    return scmp
+
 def test_wipe(basicteststr):
     """
     Basic test of the wipe function
@@ -37,10 +46,12 @@ def test_long_string_wipe(widetestchar):
     s1=widetestchar*int((2**15)/len(widetestchar))
     len_prewipe=len(s1)
     memwiper.wipeit(s1)
-    scmp = "\u0000" * len_prewipe
-    print("Len: {}", len_prewipe)
+    scmp = make_str(widetestchar, len_prewipe)
+    assert type(s1) == type(scmp)
     assert len(s1) == len_prewipe
+    assert hash(s1) == hash(scmp)
     assert s1 == scmp
+    assert 1==0
     del s1
 
 def test_huge_string_wipe(widetestchar):
@@ -48,16 +59,12 @@ def test_huge_string_wipe(widetestchar):
     Test HUGE (1M) string wipe
     """
     # Make s1 size 1M besides the len of s1
-    s1=widetestchar*int((2**22)/len(widetestchar))
+    s1=widetestchar*int((2**20)/len(widetestchar))
     len_prewipe=len(s1)
     memwiper.wipeit(s1)
-    scmp = "\u0000" * len_prewipe
-    print("Len: {}", len_prewipe)
+    scmp = make_str(widetestchar, len_prewipe)
+    assert type(s1) == type(scmp)
     assert len(s1) == len_prewipe
+    assert hash(s1) == hash(scmp)
     assert s1 == scmp
     del s1
-
-def test_null_cmp():
-    s1='\u0000\u0000'
-    assert s1 == '\u0000\u0000'
-    assert "\u0000\u0000" == "\u0000\u0000"

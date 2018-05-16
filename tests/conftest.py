@@ -41,7 +41,6 @@ def pytest_generate_tests(metafunc):
         strings = json.loads(strings)["strings"].values()
     if 'widetestchar' in metafunc.fixturenames:
         strings = ''.join([x for x in strings if not x.startswith('#')])
-        print (json.loads(strings)["chars"].values())
         strings = json.loads(strings)["chars"].values()
         
     if parametrize_to is not None:

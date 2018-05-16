@@ -1,105 +1,143 @@
 #include <Python.h>
+#include <pyhash.h>
 
 
 static PyObject *MemWiper_CoreError;
 
 
-/*
- * TODO: Rehash the string someway.
- */
 static PyObject *
 memwiper_core_wipeit(PyObject *self, PyObject *str)
 {
-Py_UCS4 null_codepoint;
 Py_UNICODE *buffer;
 PyGILState_STATE gilstate;
+PyASCIIObject *str_obj;
 long buffer_size, i;
 int kind, refc;
-
-	/*
-	 * Ensure the gil is hold to avoid multiple thread
-	 * broke this string manipulation.
-	 */
-	gilstate = PyGILState_Ensure();
 
 	/* 
 	 * Checking the type to avoid nasty things.
 	 */
 	if (!PyUnicode_Check(str))
 	{
-		PyGILState_Release(gilstate);
 		PyErr_BadArgument();
 		Py_RETURN_NONE;
 	}
 
 	/* 
 	 * Checking for "readiness"...
-	 * Whatever that means.
 	 * If not ready, push up an exception.
 	 */
 	if (PyUnicode_READY(str)){
 		PyErr_SetString(MemWiper_CoreError, "Precheck: Unicode object is not Ready!");
-		PyGILState_Release(gilstate);
 		Py_RETURN_NONE;
 	}
-
+	/*
+	 * Get the low level info of the string
+	 */
+	str_obj = (PyASCIIObject *)(str);
 	buffer = PyUnicode_DATA(str);
 	kind = PyUnicode_KIND(str);
 	refc = Py_REFCNT(str);
 	buffer_size = (long)PyUnicode_GET_LENGTH(str);
-	null_codepoint = (Py_UCS4)0;
-#ifdef MEMWIPER_DEBUG
+	
+	/*
+	 * Setup the filler character for the string
+	 *  based on the 'kind' (UCS width) we set
+	 *  the 'filler' of the same size
+	 */
+	PyObject *filler;
+	Py_UCS4 *filler_codepoint;
+	switch (kind){
+		/* 4 byte filler, the value is between the unicode range in python */
+		case 4:
+			filler = PyUnicode_FromString("\U000fffff");
+			break;
+		/* 2 byte filler */
+		case 2:
+			filler = PyUnicode_FromString("\U0000ffff");
+			break;
+		/* 1 byte filler */
+		default:
+			filler = PyUnicode_FromString("\U000000ff");
+			break;
+	}
+	filler_codepoint = PyUnicode_AsUCS4Copy(filler);
+	
+	#ifdef MEMWIPER_DEBUG
 	PySys_WriteStderr("kind: %d - refc: %d - buffer size: %ld\n", kind, refc, buffer_size);
-#endif
+        PySys_WriteStderr("Pre hash: %ld\n", str_obj->hash);
+	#endif
+	
+	/*
+	 * Ensure the gil is hold to avoid multiple thread
+	 * broke this string manipulation.
+	 */
+	gilstate = PyGILState_Ensure();
+	#ifdef MEMWIPER_DEBUG
+        PySys_WriteStderr("GIL Taked!\n");
+	#endif
+
 	/*
 	 *
 	 * If refcount is 1 is OK to use PyUnicode_Fill()
 	 */
 	if (refc == 1) {
-#ifdef MEMWIPER_DEBUG
+		#ifdef MEMWIPER_DEBUG
 		PySys_WriteStderr("REFCNT=1 - Using PyUnicode_Fill");
-#endif
+		#endif
 		int finalsize;
-		finalsize = PyUnicode_Fill(str, 0, buffer_size-1, null_codepoint);
-#ifdef MEMWIPER_DEBUG
+		finalsize = PyUnicode_Fill(str, 0, buffer_size-1, *filler_codepoint);
+		if (finalsize != buffer_size){
+			PySys_WriteStderr("Using PyUnicode_fill and the spected size is diferent:\n");
+			PySys_WriteStderr("buffer_size: %ld - finalsize: %d\n", buffer_size, finalsize);
+			PyErr_SetString(MemWiper_CoreError, "Using PyUnicode_fill and the resulting size is diferent.\n");
+			PyGILState_Release(gilstate);
+			Py_RETURN_NONE;
+		}
+		#ifdef MEMWIPER_DEBUG
 		PySys_WriteStderr("buffer_size: %ld - finalsize: %d\n", buffer_size, finalsize);
-#endif
+		#endif
 	}else{
 	/*
 	 * Overwirte the current str buffer "manually"
 	*/
-#ifdef MEMWIPER_DEBUG
+		#ifdef MEMWIPER_DEBUG
 		PySys_WriteStderr("REFCNT!=1 - Using for+PyUnicode_WRITE\n");
-#endif
+		#endif
 		for (i=0;i<buffer_size;i++)
 		{
-#ifdef MEMWIPER_DEBUG
-	        	PySys_WriteStderr("Writing %ld of %ld\n", i, (buffer_size-1));
-#endif
-			PyUnicode_WRITE(kind, buffer, i, null_codepoint);
-#ifdef MEMWIPER_DEBUG
-                        PySys_WriteStderr("It was written %ld of %ld\n", i, (buffer_size-1));
-#endif
+			PyUnicode_WRITE(kind, buffer, i, *filler_codepoint);
 		}
 	}
-#ifdef MEMWIPER_DEBUG
+	
+	/*
+	 * Releasing the gil ASAP
+	 */
+	PyGILState_Release(gilstate);
+	
+	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("All Written! goint to ready test\n");
-#endif
+        PySys_WriteStderr("GIL Released! - Returning!\n");
+	#endif
+	
 	if (PyUnicode_READY(str)){
 		PyErr_SetString(MemWiper_CoreError, "Postcheck: Unicode object is not Ready!");
 		PyGILState_Release(gilstate);
 		Py_RETURN_NONE;
 	}
-#ifdef MEMWIPER_DEBUG
+	
+	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("Post Ready check was OK!\n");
-#endif
-	/*
-	 * Releasing the gil ASAP
-	 */
-	PyGILState_Release(gilstate);
-#ifdef MEMWIPER_DEBUG
-        PySys_WriteStderr("GIL Released! - Returning!\n");
-#endif
+	PySys_WriteStderr("Current hash: %ld\n", str_obj->hash);
+	#endif
+        
+	if (str_obj->hash != -1)
+		str_obj->hash = _Py_HashBytes(buffer, buffer_size*kind);
+	
+	#ifdef MEMWIPER_DEBUG
+        PySys_WriteStderr("New hash: %ld\n", str_obj->hash);
+	#endif
+
 	Py_RETURN_NONE;
 }
 
