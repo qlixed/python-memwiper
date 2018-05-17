@@ -1,6 +1,7 @@
-import pytest
 import json
 from pprint import pprint
+
+import pytest
 
 
 def pytest_addoption(parser):

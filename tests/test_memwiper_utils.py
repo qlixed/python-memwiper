@@ -1,4 +1,5 @@
 import pytest
+
 import memwiper.utils as mwutils
 
 UNICODE_KIND = [
@@ -40,5 +41,3 @@ def test_memwiper_utils_funcs(wideteststr):
     size = mwutils.size(wideteststr)
     codepoints = mwutils.codepoints(wideteststr)
     assert size == codepoints * UNICODE_WIDTH[kind]
-
-
