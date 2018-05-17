@@ -70,3 +70,4 @@ docs/_build
 *valgrind*.*
 installed.txt
 distclean.sh
+core.*
