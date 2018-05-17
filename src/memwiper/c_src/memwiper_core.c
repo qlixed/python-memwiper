@@ -47,18 +47,19 @@ int kind, refc;
 	 */
 	PyObject *filler;
 	Py_UCS4 *filler_codepoint;
+	const char *filler_char[3] = {"\U000000ff", "\U0000ffff", "\U000fffff"};
 	switch (kind){
 		/* 4 byte filler, the value is between the unicode range in python */
 		case 4:
-			filler = PyUnicode_FromString("\U000fffff");
+			filler = PyUnicode_FromString(filler_char[2]);
 			break;
 		/* 2 byte filler */
 		case 2:
-			filler = PyUnicode_FromString("\U0000ffff");
+			filler = PyUnicode_FromString(filler_char[1]);
 			break;
 		/* 1 byte filler */
 		default:
-			filler = PyUnicode_FromString("\U000000ff");
+			filler = PyUnicode_FromString(filler_char[0]);
 			break;
 	}
 	filler_codepoint = PyUnicode_AsUCS4Copy(filler);
@@ -113,10 +114,11 @@ int kind, refc;
 	/*
 	 * Releasing the gil ASAP
 	 */
+	Py_DECREF(filler_codepoint);
+	Py_DECREF(filler);
 	PyGILState_Release(gilstate);
 	
 	#ifdef MEMWIPER_DEBUG
-        PySys_WriteStderr("All Written! goint to ready test\n");
         PySys_WriteStderr("GIL Released! - Returning!\n");
 	#endif
 	
