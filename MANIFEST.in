@@ -15,6 +15,9 @@ include CHANGELOG.rst
 include CONTRIBUTING.rst
 include LICENSE
 include README.rst
+include TODO.rst
+include requirements.txt
+include requirements-dev.txt
 
 include tox.ini .travis.yml appveyor.yml
 
@@ -22,4 +25,4 @@ prune __pycache__
 prune .ropeproject
 prune */.ropeproject
 
-global-exclude *.py[cod] *.bkp *.so *.dylib
+global-exclude *.py[cod] *.bkp *.so *.dylib *valgrind*

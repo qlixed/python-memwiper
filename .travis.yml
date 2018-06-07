@@ -17,26 +17,6 @@ matrix:
     - env: TOXENV=docs
   include:
     - os: linux
-      python: "3.3"
-      env:
-        - TOXENV=3.3-cover-linux,report,extension-coveralls,coveralls,codecov
-    - os: osx
-      python: "3.3"
-      language: generic
-      env:
-        - TOXENV=3.3-cover-osx,report,extension-coveralls,coveralls,codecov
-
-    - os: linux
-      python: "3.3"
-      env:
-        - TOXENV=3.3-nocov-linux
-    - os: osx
-      python: "3.3"
-      language: generic
-      env:
-        - TOXENV=3.3-nocov-osx
-
-    - os: linux
       python: "3.4"
       env:
         - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
