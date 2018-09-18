@@ -1,7 +1,8 @@
+import shlex
+import subprocess
+
 import pytest
 
-import subprocess
-import shlex
 
 def test_interned_issue():
     cmd=shlex.split("python3 -c \"import memwiper;s='hola';memwiper.wipeit(s);\"")
@@ -13,5 +14,3 @@ def test_interned_issue():
     print("cerr:\n", cerr)
     print("-"*50)
     assert p.returncode == 0
-
-

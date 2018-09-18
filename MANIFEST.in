@@ -25,4 +25,4 @@ prune __pycache__
 prune .ropeproject
 prune */.ropeproject
 
-global-exclude *.py[cod] *.bkp *.so *.dylib *valgrind*
+global-exclude *.py[cod] *.bkp *.so *.dylib *valgrind* memleak*
