@@ -46,7 +46,7 @@ int kind, refc;
 	 *  the 'filler' of the same size
 	 */
 	PyObject *filler;
-	Py_UCS4 *filler_codepoint;
+	Py_UCS4 filler_codepoint;
 	const char *filler_char[3] = {"\U000000ff", "\U0000ffff", "\U000fffff"};
 	switch (kind){
 		/* 4 byte filler, the value is between the unicode range in python */
@@ -62,7 +62,8 @@ int kind, refc;
 			filler = PyUnicode_FromString(filler_char[0]);
 			break;
 	}
-	filler_codepoint = PyUnicode_AsUCS4Copy(filler);
+	/* PyUnicode_InternInPlace(&filler); */
+	filler_codepoint = PyUnicode_ReadChar(filler, 0);
 	
 	#ifdef MEMWIPER_DEBUG
 	PySys_WriteStderr("kind: %d - refc: %d - buffer size: %ld\n", kind, refc, buffer_size);
@@ -78,8 +79,8 @@ int kind, refc;
         PySys_WriteStderr("GIL Taked!\n");
 	#endif
 
+
 	/*
-	 *
 	 * If refcount is 1 is OK to use PyUnicode_Fill()
 	 */
 	if (refc == 1) {
@@ -87,7 +88,7 @@ int kind, refc;
 		PySys_WriteStderr("REFCNT=1 - Using PyUnicode_Fill");
 		#endif
 		int finalsize;
-		finalsize = PyUnicode_Fill(str, 0, buffer_size-1, *filler_codepoint);
+		finalsize = PyUnicode_Fill(str, 0, buffer_size-1, filler_codepoint);
 		if (finalsize != buffer_size){
 			PySys_WriteStderr("Using PyUnicode_fill and the spected size is diferent:\n");
 			PySys_WriteStderr("buffer_size: %ld - finalsize: %d\n", buffer_size, finalsize);
@@ -107,14 +108,29 @@ int kind, refc;
 		#endif
 		for (i=0;i<buffer_size;i++)
 		{
-			PyUnicode_WRITE(kind, buffer, i, *filler_codepoint);
+			PyUnicode_WRITE(kind, buffer, i, filler_codepoint);
 		}
 	}
+
+	#ifdef MEMWIPER_DEBUG
+	PySys_WriteStderr("Current hash: %ld\n", str_obj->hash);
+	#endif
+ 
+	if (str_obj->hash != -1){
+		str_obj->hash = _Py_HashBytes(buffer, buffer_size*kind);
+		str_obj->state.interned = 0;
+	}
 	
+	PyUnicode_InternInPlace(&str);
+
+	
+	#ifdef MEMWIPER_DEBUG
+        PySys_WriteStderr("New hash: %ld\n", str_obj->hash);
+	#endif
+
 	/*
 	 * Releasing the gil ASAP
 	 */
-	Py_DECREF(filler_codepoint);
 	Py_DECREF(filler);
 	PyGILState_Release(gilstate);
 	
@@ -130,14 +146,6 @@ int kind, refc;
 	
 	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("Post Ready check was OK!\n");
-	PySys_WriteStderr("Current hash: %ld\n", str_obj->hash);
-	#endif
-        
-	if (str_obj->hash != -1)
-		str_obj->hash = _Py_HashBytes(buffer, buffer_size*kind);
-	
-	#ifdef MEMWIPER_DEBUG
-        PySys_WriteStderr("New hash: %ld\n", str_obj->hash);
 	#endif
 
 	Py_RETURN_NONE;
