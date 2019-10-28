@@ -64,9 +64,9 @@ Overview
 
 .. end-badges
 
-Now you can overwrite with 0x0's your inmutable strings without issues
+Now you can overwrite with garbage your inmutable strings without issues
 
-* Free software: BSD license
+* Free software: MIT license - Can I use this in a GPLed software?: Yes, see https://softwareengineering.stackexchange.com/questions/316393/what-to-do-when-using-mit-licensed-code-in-a-gpl-licensed-project for a quick overview of the matter.
 
 Installation
 ============
@@ -112,7 +112,7 @@ Platforms Supported:
 * Windows - Tested and working, requires more testing. You can check `Issue #1 <https://github.com/qlixed/python-memwiper/issues/1>`_
 
 The code is full Python C API, not external libraries used, this was done to maximize the portability.
-{I'm searching help with the Mac and Windows testing, so check the issues and leave a comment if you wanna help!
+I'm searching help with the Mac and Windows testing, so check the issues and leave a comment if you wanna help!
 
 Why?:
 =====
@@ -121,7 +121,7 @@ All your sensitive information belongs to the memory!
 
 Well that obvious, I know, but is a weird issue to handle in most of the
 languages that uses garbage collection for memory management and inmutable
-strings, let me show a quick ipython example::
+strings, let me show a quick i`python example::
 
  In [1]: s1="Secret Agent data"
 
