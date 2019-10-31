@@ -1,7 +1,7 @@
 ========
 memwiper
 ========
-Now you can overwrite with 0x0's your inmutable strings without issues.
+Now you can overwrite with garbage your inmutable strings without issues.
 
 
 Overview
@@ -45,9 +45,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/memwiper
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v1.0.0.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v0.8.0-dev.svg
     :alt: Commits since latest release
-    :target: https://github.com/qlixed/python-memwiper/compare/v1.0.0...master
+    :target: https://github.com/qlixed/python-memwiper/compare/v0.8.0-dev...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/memwiper.svg
     :alt: PyPI Wheel
@@ -64,9 +64,9 @@ Overview
 
 .. end-badges
 
-Now you can overwrite with 0x0's your inmutable strings without issues
+Now you can overwrite with garbage your inmutable strings without breaking all.
 
-* Free software: BSD license
+* Free software: MIT license - Can I use this in a GPLed software?: Yes, see https://softwareengineering.stackexchange.com/questions/316393/what-to-do-when-using-mit-licensed-code-in-a-gpl-licensed-project for a quick overview of the matter.
 
 Installation
 ============
@@ -86,23 +86,6 @@ Development
 To run the all tests run::
 
     tox
-
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
 
 Platforms Supported:
 ====================

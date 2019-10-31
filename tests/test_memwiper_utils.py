@@ -9,29 +9,35 @@ UNICODE_KIND = [
     "4 Byte"
 ]
 
-s1 = "'Hello friend!' in spanish: '¡Hola amigo!'"
+UNICODE_WIDTH = {
+    "1 Byte" : 1,
+    "2 Byte" : 2,
+    "4 Byte" : 4
+    }
+
+# AFAIK the Wide Char is only used as representation on 
+# the C side of any Python/C API. So we don't test for it.
+# Text on 1 Byte wide:
+#s1 = "'Hello friend!' translated to spanish: '¡Hola amigo!'"
 # Japanese text using 2 Byte wide unicode simbols
-s2 = "'Hello friend!' in spanish: 'こんにちは！'"
+#s2 = "'Hello friend!' translated to japanese: 'こんにちは！'"
 # Pi definition, uses 4 byte wide unicode simbols
-s3 = "Pi definition: 𝝅=𝑪/𝐝"
+#s3 = "Pi definition: 𝝅=𝑪/𝐝"
+
+def test_memwiper_utils_kind(wideteststr):
+    assert mwutils.kind(wideteststr) in UNICODE_KIND
 
 
-def test_memwiper_utils_kind():
-    assert mwutils.kind(s1) in UNICODE_KIND
-    assert mwutils.kind(s1) == UNICODE_KIND[1]
-    assert mwutils.kind(s2) in UNICODE_KIND
-    assert mwutils.kind(s2) == UNICODE_KIND[2]
-    assert mwutils.kind(s3) in UNICODE_KIND
-    assert mwutils.kind(s3) == UNICODE_KIND[3]
+def test_memwiper_utils_codepoints(wideteststr):
+    assert mwutils.codepoints(wideteststr) == len(wideteststr)
 
 
-def test_memwiper_utils_codepoints():
-    assert mwutils.codepoints(s1) == len(s1)
-    assert mwutils.codepoints(s2) == len(s2)
-    assert mwutils.codepoints(s3) == len(s3)
+def test_memwiper_utils_size(wideteststr):
+    assert mwutils.size(wideteststr) in [len(wideteststr), len(wideteststr)*2, len(wideteststr)*4]
 
 
-def test_memwiper_utils_size():
-    assert mwutils.size(s1) == len(s1)
-    assert mwutils.size(s2) == len(s2)*2
-    assert mwutils.size(s3) == len(s3)*4
+def test_memwiper_utils_funcs(wideteststr):
+    kind = mwutils.kind(wideteststr)
+    size = mwutils.size(wideteststr)
+    codepoints = mwutils.codepoints(wideteststr)
+    assert size == codepoints * UNICODE_WIDTH[kind]

@@ -1,0 +1,5 @@
+bumpversion
+pytest
+pytest-cov
+pytest-faulthandler
+tox
