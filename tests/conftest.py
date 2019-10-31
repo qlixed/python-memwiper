@@ -18,7 +18,7 @@ def pytest_addoption(parser):
                     "We provide a default one (widetest.txt)")
 
 
-def pytest_generate_tests(metafunc):
+def pytest_generate_tests(metafunc): # pragma: no cover
     strings = None
     filename = None
     parametrize_to = None
@@ -33,7 +33,7 @@ def pytest_generate_tests(metafunc):
         filename = metafunc.config.option.widefile[0]
         parametrize_to = 'widetestchar'
 
-    if filename is not None:
+    if filename:
         with open(filename, 'r', encoding='utf_8') as f:
             strings = f.readlines()
     
@@ -44,6 +44,6 @@ def pytest_generate_tests(metafunc):
         strings = ''.join([x for x in strings if not x.startswith('#')])
         strings = json.loads(strings)["chars"].values()
         
-    if parametrize_to is not None:
+    if parametrize_to:
         metafunc.parametrize(parametrize_to, strings)
     return
