@@ -62,6 +62,14 @@ docs/_build
 .env
 .cache
 .pytest
+.pytest_cache
 .bootstrap
 .appveyor.token
 *.bak
+
+# Custom conf
+*valgrind*
+*valgrind*.*
+installed.txt
+distclean.sh
+core.*

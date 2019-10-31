@@ -1,11 +1,7 @@
 ========
 memwiper
 ========
-<<<<<<< Updated upstream
-Now you can overwrite with 0x0's your inmutable strings without issues.
-=======
 Now you can overwrite with garbage your inmutable strings without issues.
->>>>>>> Stashed changes
 
 
 Overview
@@ -49,9 +45,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/memwiper
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v1.0.0.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v0.8.0-dev.svg
     :alt: Commits since latest release
-    :target: https://github.com/qlixed/python-memwiper/compare/v1.0.0...master
+    :target: https://github.com/qlixed/python-memwiper/compare/v0.8.0-dev...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/memwiper.svg
     :alt: PyPI Wheel
