@@ -7,42 +7,10 @@ environment:
     WITH_COMPILER: 'cmd /E:ON /V:ON /C .\ci\appveyor-with-compiler.cmd'
   matrix:
     - TOXENV: check
-      TOXPYTHON: C:\Python34\python.exe
-      PYTHON_HOME: C:\Python34
-      PYTHON_VERSION: '3.4'
-      PYTHON_ARCH: '32'
-
-
-
-    - TOXENV: '3.4-cover-win,report,codecov'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      TOXPYTHON: C:\Python34\python.exe
-      PYTHON_HOME: C:\Python34
-      PYTHON_VERSION: '3.4'
-      PYTHON_ARCH: '32'
-    - TOXENV: '3.4-cover-win,report,codecov'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      TOXPYTHON: C:\Python34-x64\python.exe
-      PYTHON_HOME: C:\Python34-x64
-      PYTHON_VERSION: '3.4'
+      TOXPYTHON: C:\Python37\python.exe
+      PYTHON_HOME: C:\Python37
+      PYTHON_VERSION: '3.7'
       PYTHON_ARCH: '64'
-
-
-
-
-    - TOXENV: '3.4-nocov-win'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      TOXPYTHON: C:\Python34\python.exe
-      PYTHON_HOME: C:\Python34
-      PYTHON_VERSION: '3.4'
-      PYTHON_ARCH: '32'
-    - TOXENV: '3.4-nocov-win'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      TOXPYTHON: C:\Python34-x64\python.exe
-      PYTHON_HOME: C:\Python34-x64
-      PYTHON_VERSION: '3.4'
-      PYTHON_ARCH: '64'
-
 
 
 
@@ -105,6 +73,70 @@ environment:
       TOXPYTHON: C:\Python36-x64\python.exe
       PYTHON_HOME: C:\Python36-x64
       PYTHON_VERSION: '3.6'
+      PYTHON_ARCH: '64'
+
+
+
+
+    - TOXENV: '3.7-cover-win,report,codecov'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python37\python.exe
+      PYTHON_HOME: C:\Python37
+      PYTHON_VERSION: '3.7'
+      PYTHON_ARCH: '32'
+    - TOXENV: '3.7-cover-win,report,codecov'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python37-x64\python.exe
+      PYTHON_HOME: C:\Python37-x64
+      PYTHON_VERSION: '3.7'
+      PYTHON_ARCH: '64'
+
+
+
+
+    - TOXENV: '3.7-nocov-win'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python37\python.exe
+      PYTHON_HOME: C:\Python37
+      PYTHON_VERSION: '3.7'
+      PYTHON_ARCH: '32'
+    - TOXENV: '3.7-nocov-win'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python37-x64\python.exe
+      PYTHON_HOME: C:\Python37-x64
+      PYTHON_VERSION: '3.7'
+      PYTHON_ARCH: '64'
+
+
+
+
+    - TOXENV: '3.8-cover-win,report,codecov'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python38\python.exe
+      PYTHON_HOME: C:\Python38
+      PYTHON_VERSION: '3.8'
+      PYTHON_ARCH: '32'
+    - TOXENV: '3.8-cover-win,report,codecov'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python38-x64\python.exe
+      PYTHON_HOME: C:\Python38-x64
+      PYTHON_VERSION: '3.8'
+      PYTHON_ARCH: '64'
+
+
+
+
+    - TOXENV: '3.8-nocov-win'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python38\python.exe
+      PYTHON_HOME: C:\Python38
+      PYTHON_VERSION: '3.8'
+      PYTHON_ARCH: '32'
+    - TOXENV: '3.8-nocov-win'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      TOXPYTHON: C:\Python38-x64\python.exe
+      PYTHON_HOME: C:\Python38-x64
+      PYTHON_VERSION: '3.8'
       PYTHON_ARCH: '64'
 
 init:

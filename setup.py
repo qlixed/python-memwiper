@@ -39,12 +39,15 @@ def read(*names, **kwargs):
 if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
     os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
 
-os.environ['CFLAGS'] = '-DMEMWIPER_DEBUG=1'
+if 'CFLAGS' in os.environ:
+    os.environ['CFLAGS'] = ' '.join((os.environ['CFLAGS'], '-DMEMWIPER_DEBUG=1'))
+else:
+    os.environ['CFLAGS'] = '-DMEMWIPER_DEBUG=1'
 
 setup(
     name='memwiper',
-    version='0.8.0-dev',
-    license='BSD',
+    version='0.9.0.dev0',
+    license='MIT',
     description="Let you overwrite with 0x0's your inmutable strings easily",
     long_description='%s\n%s' % (
         re.compile(
@@ -54,7 +57,7 @@ setup(
          read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
-    author='QliXed - Ezequiel Hector Brizuela',
+    author='Ezequiel Hector Brizuela - qlixed',
     author_email='qlixed@gmail.com',
     url='https://github.com/qlixed/python-memwiper',
     packages=find_packages('src'),

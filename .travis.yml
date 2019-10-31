@@ -2,7 +2,7 @@
 
 language: python
 python:
-    "3.4"
+    "3.7"
 sudo: false
 cache: pip
 env:
@@ -17,34 +17,14 @@ matrix:
     - env: TOXENV=docs
   include:
     - os: linux
-      python: "3.4"
-      env:
-        - TOXENV=3.4-cover-linux,report,extension-coveralls,coveralls,codecov
-    - os: osx
-      python: "3.4"
-      language: generic
-      env:
-        - TOXENV=3.4-cover-osx,report,extension-coveralls,coveralls,codecov
-
-    - os: linux
-      python: "3.4"
-      env:
-        - TOXENV=3.4-nocov-linux
-    - os: osx
-      python: "3.4"
-      language: generic
-      env:
-        - TOXENV=3.4-nocov-osx
-
-    - os: linux
       python: "3.5"
       env:
-        - TOXENV=3.5-cover-linux,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.5-cover-linux,report,coveralls
     - os: osx
       python: "3.5"
       language: generic
       env:
-        - TOXENV=3.5-cover-osx,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.5-cover-osx,report,coveralls
 
     - os: linux
       python: "3.5"
@@ -59,12 +39,12 @@ matrix:
     - os: linux
       python: "3.6"
       env:
-        - TOXENV=3.6-cover-linux,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.6-cover-linux,report,coveralls
     - os: osx
       python: "3.6"
       language: generic
       env:
-        - TOXENV=3.6-cover-osx,report,extension-coveralls,coveralls,codecov
+        - TOXENV=3.6-cover-osx,report,coveralls
 
     - os: linux
       python: "3.6"
@@ -75,6 +55,46 @@ matrix:
       language: generic
       env:
         - TOXENV=3.6-nocov-osx
+
+    - os: linux
+      python: "3.7"
+      env:
+        - TOXENV=3.7-cover-linux,report,coveralls
+    - os: osx
+      python: "3.7"
+      language: generic
+      env:
+        - TOXENV=3.7-cover-osx,report,coveralls
+
+    - os: linux
+      python: "3.7"
+      env:
+        - TOXENV=3.7-nocov-linux
+    - os: osx
+      python: "3.7"
+      language: generic
+      env:
+        - TOXENV=3.7-nocov-osx
+
+    - os: linux
+      python: "3.8"
+      env:
+        - TOXENV=3.8-cover-linux,report,coveralls
+    - os: osx
+      python: "3.8"
+      language: generic
+      env:
+        - TOXENV=3.8-cover-osx,report,coveralls
+
+    - os: linux
+      python: "3.8"
+      env:
+        - TOXENV=3.8-nocov-linux
+    - os: osx
+      python: "3.8"
+      language: generic
+      env:
+        - TOXENV=3.8-nocov-osx
 
 before_install:
   - python --version

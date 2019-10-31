@@ -1,7 +1,7 @@
 ========
 memwiper
 ========
-Now you can overwrite with \u0000's your inmutable strings without issues.
+Now you can overwrite with garbage your inmutable strings without issues.
 
 
 Overview
@@ -64,9 +64,9 @@ Overview
 
 .. end-badges
 
-Now you can overwrite with 0x0's your inmutable strings without issues
+Now you can overwrite with garbage your inmutable strings without breaking all.
 
-* Free software: BSD license
+* Free software: MIT license - Can I use this in a GPLed software?: Yes, see https://softwareengineering.stackexchange.com/questions/316393/what-to-do-when-using-mit-licensed-code-in-a-gpl-licensed-project for a quick overview of the matter.
 
 Installation
 ============
@@ -86,23 +86,6 @@ Development
 To run the all tests run::
 
     tox
-
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
 
 Platforms Supported:
 ====================

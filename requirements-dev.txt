@@ -1,5 +1,5 @@
-bumpversion>=0.5.3
-pytest>=3.4.2
-pytest-faulthandler>=1.5.0
-tox>=2.9.1
-virtualenv>=15.1.0
+bumpversion
+pytest
+pytest-cov
+pytest-faulthandler
+tox
