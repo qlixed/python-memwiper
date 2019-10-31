@@ -7,10 +7,10 @@ environment:
     WITH_COMPILER: 'cmd /E:ON /V:ON /C .\ci\appveyor-with-compiler.cmd'
   matrix:
     - TOXENV: check
-      TOXPYTHON: C:\Python34\python.exe
-      PYTHON_HOME: C:\Python34
-      PYTHON_VERSION: '3.4'
-      PYTHON_ARCH: '32'
+      TOXPYTHON: C:\Python37\python.exe
+      PYTHON_HOME: C:\Python37
+      PYTHON_VERSION: '3.7'
+      PYTHON_ARCH: '64'
 {% for env, config in tox_environments|dictsort %}{{ '' }}
     {% if config.python.startswith('python') and config.os == 'win'  %}
     - TOXENV: '{{ env }}{% if config.cover %},report,codecov{% endif %}'
