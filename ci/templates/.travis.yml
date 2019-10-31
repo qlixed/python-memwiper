@@ -24,7 +24,7 @@ matrix:
       language: generic
       {% endif %}
       env:
-        - TOXENV={{ env }}{% if config.cover %},report,extension-coveralls,coveralls,codecov{% endif -%}
+        - TOXENV={{ env }}{% if config.cover %},report,extension-coveralls,coveralls{% endif -%}
   {% endif %}
 {% endfor %}
 
