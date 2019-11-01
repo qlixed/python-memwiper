@@ -6,3 +6,4 @@ tox
 requires.io
 jedi
 black
+codacy-coverage
