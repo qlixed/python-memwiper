@@ -61,12 +61,13 @@ Overview
     :alt: Supported implementations
     :target: https://pypi.python.org/pypi/memwiper
 
-
 .. end-badges
 
 Now you can overwrite with garbage your inmutable strings without breaking all.
 
 * Free software: MIT license - Can I use this in a GPLed software?: Yes, see https://softwareengineering.stackexchange.com/questions/316393/what-to-do-when-using-mit-licensed-code-in-a-gpl-licensed-project for a quick overview of the matter.
+
+Latest version v0.9.0.alpha
 
 Installation
 ============
@@ -141,7 +142,7 @@ strings, let me show a quick ipython example::
  In [3]: print(s2)
  Out[3]: Secret Agent data
 
-I delete the s1 string, but the s2 points to the same string, 
+I delete the s1 string, but the s2 points to the same string,
 as you can see in the help showed there id show the memory address of
 the object, so s1 and s2 points to the same memory position.
 

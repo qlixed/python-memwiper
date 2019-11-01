@@ -1,0 +1,60 @@
+[project]
+name = "python-memwiper"
+version = "0.9.0.alpha"
+description = "Let you overwrite with garbage your inmutable strings easily"
+authors = [
+    "Ezequiel Hector Brizuela (qlixed) <qlixed@gmail.com>"
+]
+license = "MIT"
+readme = "README.rst"
+python = "^3.6"
+homepage = "https://github.com/qlixed/python-memwiper"
+repository = "https://github.com/qlixed/python-memwiper"
+documentation = "https://python-memwiper.readthedocs.io/en/latest/"
+
+keywords = ["security", "memory security", "password"]
+
+classifiers = [
+        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: Unix",
+        "Operating System :: POSIX",
+        "Operating System :: Microsoft :: Windows",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: Implementation :: CPython",
+        # uncomment if you test on these interpreters:
+        # 'Programming Language :: Python :: Implementation :: IronPython',
+        # 'Programming Language :: Python :: Implementation :: Jython',
+        # 'Programming Language :: Python :: Implementation :: Stackless',
+        "Topic :: Utilities",
+        "Private :: Do Not Upload",
+]
+
+
+[build-system]
+requires = ["setuptools", "wheel"]  # PEP 508 specifications.
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''

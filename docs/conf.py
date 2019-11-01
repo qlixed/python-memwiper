@@ -24,9 +24,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 project = u'python-memwiper'
 year = u'2017'
-author = u'QliXed - Ezequiel Hector Brizuela'
+author = u'Ezequiel Hector Brizuela - qlixed'
 copyright = '{0}, {1}'.format(year, author)
-version = release = u'0.8.0-dev'
+version = release = u'0.9.0.alpha'
 
 pygments_style = 'trac'
 templates_path = ['.']
