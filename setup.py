@@ -17,24 +17,17 @@ from setuptools import Extension
 from setuptools import find_packages
 from setuptools import setup
 
-try:
-    # Allow installing package without any Cython available. This
-    # assumes you are going to include the .c files in your sdist.
-    import Cython
-except ImportError:
-    Cython = None
-
 
 def read(*names, **kwargs):
-    return io.open(
+    with io.open(
         join(dirname(__file__), *names),
         encoding=kwargs.get('encoding', 'utf8')
-    ).read()
+    ) as fh:
+        return fh.read()
 
 
-# Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini,
-# since that may mess with compiling  dependencies (e.g. numpy). Therefore
-# we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
+# Enable code coverage for C code: we can't use CFLAGS=-coverage in tox.ini, since that may mess with compiling
+# dependencies (e.g. numpy). Therefore we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to CFLAGS here (after
 # deps have been safely installed).
 if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
     os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
@@ -46,9 +39,9 @@ else:
 
 setup(
     name='memwiper',
-    version='0.9.0.dev0',
+    version='0.9.0',
     license='MIT',
-    description="Let you overwrite with 0x0's your inmutable strings easily",
+    description="Let you overwrite with garbage your inmutable strings easily",
     long_description='%s\n%s' % (
         re.compile(
             '^.. start-badges.*^.. end-badges',
@@ -57,7 +50,7 @@ setup(
          read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
-    author='Ezequiel Hector Brizuela - qlixed',
+    author='Ezequiel Hector Brizuela (qlixed)',
     author_email='qlixed@gmail.com',
     url='https://github.com/qlixed/python-memwiper',
     packages=find_packages('src'),
@@ -66,36 +59,37 @@ setup(
     include_package_data=True,
     zip_safe=False,
     classifiers=[
-        # complete classifier list:
-        # http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: Unix',
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
-        'Operating System :: MacOS :: MacOS X',
-        'Programming Language :: C',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Security',
+        # uncomment if you test on these interpreters:
+        # 'Programming Language :: Python :: Implementation :: IronPython',
+        # 'Programming Language :: Python :: Implementation :: Jython',
+        # 'Programming Language :: Python :: Implementation :: Stackless',
+        'Topic :: Utilities',
+        'Private :: Do Not Upload',
     ],
-    entry_points={
-        'console_scripts': [
-            'memwiper_coretest = memwiper._coretest:main',
-        ],
+    project_urls={
+        'Documentation': 'https://python-memwiper.readthedocs.io/',
+        'Changelog': 'https://python-memwiper.readthedocs.io/en/latest/changelog.html',
+        'Issue Tracker': 'https://github.com/qlixed/python-memwiper/issues',
     },
     keywords=[
         # eg: 'keyword1', 'keyword2', 'keyword3',
-        'security', 'strings', 'python3', 'cpython'
     ],
+    python_requires='!=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
     install_requires=[
         # eg: 'aspectlib==1.1.1', 'six>=1.7',
     ],
@@ -105,8 +99,8 @@ setup(
         #   ':python_version=="2.6"': ['argparse'],
     },
     setup_requires=[
-        'cython',
-    ] if Cython else [],
+        'pytest-runner',
+    ],
     ext_modules=[
         Extension(
             splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
@@ -114,6 +108,6 @@ setup(
             include_dirs=[dirname(path)]
         )
         for root, _, _ in os.walk('src')
-        for path in glob(join(root, '*.pyx' if Cython else '*.c'))
+        for path in glob(join(root, '*.c'))
     ],
 )
