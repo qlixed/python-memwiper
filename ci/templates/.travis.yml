@@ -39,8 +39,10 @@ before_install:
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
       brew update
       brew install openssl readline sqlite3 xz zlib
-      brew install pydev
+      brew install pyenv
       export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+      eval "$(pyenv init -)"
+      pyenv install 3.7-dev
     fi
 install:
   - python -mpip install --progress-bar=off tox -rci/requirements.txt
