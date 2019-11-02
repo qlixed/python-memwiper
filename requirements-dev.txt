@@ -8,3 +8,4 @@ jedi
 black
 codacy-coverage
 coveralls
+codecov
