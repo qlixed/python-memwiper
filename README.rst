@@ -29,9 +29,9 @@ Overview
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/qlixed/python-memwiper
 
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/qlixed/python-memwiper?branch=master&svg=true
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/qlixed/python-memwiper
+.. |codacy| image:: https://api.codacy.com/project/badge/Grade/d51010442aa94589aa0d380c17933ca1
+    :alt: Codacy Badge
+    :target: https://www.codacy.com/manual/qlixed/python-memwiper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=qlixed/python-memwiper&amp;utm_campaign=Badge_Grade
 
 .. |coveralls| image:: https://coveralls.io/repos/qlixed/python-memwiper/badge.svg?branch=master&service=github
     :alt: Coverage Status
