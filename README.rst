@@ -47,7 +47,7 @@ Overview
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v0.8.0-dev.svg
     :alt: Commits since latest release
-    :target: https://github.com/qlixed/python-memwiper/compare/v0.8.0-dev...master
+    :target: https://github.com/qlixed/python-memwiper/compare/develop...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/memwiper.svg
     :alt: PyPI Wheel
