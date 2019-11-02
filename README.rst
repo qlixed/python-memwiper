@@ -22,8 +22,8 @@ Overview
         | |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/python-memwiper/badge/?style=flat
-    :target: https://readthedocs.org/projects/python-memwiper
     :alt: Documentation Status
+    :target: https://readthedocs.org/projects/python-memwiper
 
 .. |travis| image:: https://travis-ci.org/qlixed/python-memwiper.svg?branch=master
     :alt: Travis-CI Build Status
@@ -43,7 +43,7 @@ Overview
 
 .. |version| image:: https://img.shields.io/pypi/v/memwiper.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v0.8.0-dev.svg
     :alt: Commits since latest release
@@ -51,15 +51,15 @@ Overview
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/memwiper.svg
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/memwiper.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/memwiper.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. end-badges
 
