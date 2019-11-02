@@ -15,8 +15,9 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor|
-        | |coveralls| |codecov|
+      - | |travis|
+        | |codacy| |codecov|
+        | |requires-io|
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
@@ -33,13 +34,13 @@ Overview
     :alt: Codacy Badge
     :target: https://www.codacy.com/manual/qlixed/python-memwiper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=qlixed/python-memwiper&amp;utm_campaign=Badge_Grade
 
-.. |coveralls| image:: https://coveralls.io/repos/qlixed/python-memwiper/badge.svg?branch=master&service=github
-    :alt: Coverage Status
-    :target: https://coveralls.io/r/qlixed/python-memwiper
-
 .. |codecov| image:: https://codecov.io/github/qlixed/python-memwiper/coverage.svg?branch=master
     :alt: Coverage Status
     :target: https://codecov.io/github/qlixed/python-memwiper
+
+.. |requires-io| image:: https://requires.io/github/qlixed/python-memwiper/requirements.svg?branch=develop
+     :target: https://requires.io/github/qlixed/python-memwiper/requirements/?branch=develop
+     :alt: Requirements Status
 
 .. |version| image:: https://img.shields.io/pypi/v/memwiper.svg
     :alt: PyPI Package latest release

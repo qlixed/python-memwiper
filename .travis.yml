@@ -57,6 +57,7 @@ before_install:
       export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
       eval "$(pyenv init -)"
       pyenv install 3.7-dev
+      pyenv global 3.7-dev
     fi
 install:
   - python -mpip install --progress-bar=off tox -rci/requirements.txt
