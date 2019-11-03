@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-        architecture: ${{ matrix.architexture }}
+        architecture: ${{ matrix.architecture }}
     - name: Bash Command Lines for GitHub Actions
       uses: jdickey/bash@v.1.1.1
       with:
