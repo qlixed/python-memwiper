@@ -14,13 +14,6 @@ matrix:
       env:
         - TOXENV=docs
 {%- for env, config in tox_environments|dictsort %}{{ '' }}
-{%- if 'py37' in env or 'py27' in env %}{{ '' }}
-  allow_failure:
-    - os: osx
-      language: generic
-      env:
-        - TOXENV={{ env }}
-{%- endif %}{{ '' }}
     - env:
         - TOXENV={{ env }}{% if config.cover %},codecov{% endif %}
 {%- if env.startswith('pypy3') %}{{ '' }}
@@ -31,10 +24,14 @@ matrix:
 {%- else %}{{ '' }}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
 {%- endif %}
-{%- endfor %}{{ '' }}
-jobs:
-    allow_failures:
+{%- if 'py37' in env or 'py27' in env %}{{ '' }}
+  allow_failure:
     - os: osx
+      language: generic
+      env:
+        - TOXENV={{ env }}
+{%- endif %}{{ '' }}
+{%- endfor %}{{ '' }}
 before_install:
   - python --version
   - uname -a

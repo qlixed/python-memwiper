@@ -25,11 +25,6 @@ matrix:
     - env:
         - TOXENV=py36-nocov
       python: '3.6'
-  allow_failure:
-    - os: osx
-      language: generic
-      env:
-        - TOXENV=py37-cover
     - env:
         - TOXENV=py37-cover,codecov
       python: '3.7'
@@ -37,19 +32,21 @@ matrix:
     - os: osx
       language: generic
       env:
-        - TOXENV=py37-nocov
+        - TOXENV=py37-cover
     - env:
         - TOXENV=py37-nocov
       python: '3.7'
+  allow_failure:
+    - os: osx
+      language: generic
+      env:
+        - TOXENV=py37-nocov
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
     - env:
         - TOXENV=py38-nocov
       python: '3.8'
-jobs:
-    allow_failures:
-    - os: osx
 before_install:
   - python --version
   - uname -a
