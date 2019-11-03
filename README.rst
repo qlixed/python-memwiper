@@ -15,51 +15,52 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor|
-        | |coveralls| |codecov|
+      - | |travis|
+        | |codacy| |codecov|
+        | |requires-io|
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
 
 .. |docs| image:: https://readthedocs.org/projects/python-memwiper/badge/?style=flat
-    :target: https://readthedocs.org/projects/python-memwiper
     :alt: Documentation Status
+    :target: https://readthedocs.org/projects/python-memwiper
 
 .. |travis| image:: https://travis-ci.org/qlixed/python-memwiper.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/qlixed/python-memwiper
 
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/qlixed/python-memwiper?branch=master&svg=true
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/qlixed/python-memwiper
-
-.. |coveralls| image:: https://coveralls.io/repos/qlixed/python-memwiper/badge.svg?branch=master&service=github
-    :alt: Coverage Status
-    :target: https://coveralls.io/r/qlixed/python-memwiper
+.. |codacy| image:: https://api.codacy.com/project/badge/Grade/d51010442aa94589aa0d380c17933ca1
+    :alt: Codacy Badge
+    :target: https://www.codacy.com/manual/qlixed/python-memwiper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=qlixed/python-memwiper&amp;utm_campaign=Badge_Grade
 
 .. |codecov| image:: https://codecov.io/github/qlixed/python-memwiper/coverage.svg?branch=master
     :alt: Coverage Status
     :target: https://codecov.io/github/qlixed/python-memwiper
 
+.. |requires-io| image:: https://requires.io/github/qlixed/python-memwiper/requirements.svg?branch=develop
+     :target: https://requires.io/github/qlixed/python-memwiper/requirements/?branch=develop
+     :alt: Requirements Status
+
 .. |version| image:: https://img.shields.io/pypi/v/memwiper.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/qlixed/python-memwiper/v0.8.0-dev.svg
     :alt: Commits since latest release
-    :target: https://github.com/qlixed/python-memwiper/compare/v0.8.0-dev...master
+    :target: https://github.com/qlixed/python-memwiper/compare/develop...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/memwiper.svg
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/memwiper.svg
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/memwiper.svg
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/memwiper
+..    :target: https://pypi.python.org/pypi/memwiper
 
 .. end-badges
 

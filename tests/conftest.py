@@ -2,6 +2,8 @@ import json
 
 import pytest  # noqa: F401
 
+collect_ignore = ["src/memwiper/utils/_coretest.py"]
+
 
 def pytest_addoption(parser):
     parser.addoption(

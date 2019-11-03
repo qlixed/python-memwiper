@@ -14,7 +14,7 @@ PyASCIIObject *str_obj;
 long buffer_size, i;
 int kind, refc;
 
-	/* 
+	/*
 	 * Checking the type to avoid nasty things.
 	 */
 	if (!PyUnicode_Check(str))
@@ -23,7 +23,7 @@ int kind, refc;
 		Py_RETURN_NONE;
 	}
 
-	/* 
+	/*
 	 * Checking for "readiness"...
 	 * If not ready, push up an exception.
 	 */
@@ -39,7 +39,7 @@ int kind, refc;
 	kind = PyUnicode_KIND(str);
 	refc = Py_REFCNT(str);
 	buffer_size = (long)PyUnicode_GET_LENGTH(str);
-	
+
 	/*
 	 * Setup the filler character for the string
 	 *  based on the 'kind' (UCS width) we set
@@ -63,12 +63,12 @@ int kind, refc;
 			break;
 	}
 	filler_codepoint = PyUnicode_AsUCS4Copy(filler);
-	
+
 	#ifdef MEMWIPER_DEBUG
 	PySys_WriteStderr("kind: %d - refc: %d - buffer size: %ld\n", kind, refc, buffer_size);
         PySys_WriteStderr("Pre hash: %ld\n", str_obj->hash);
 	#endif
-	
+
 	/*
 	 * Ensure the gil is hold to avoid multiple thread
 	 * broke this string manipulation.
@@ -110,32 +110,32 @@ int kind, refc;
 			PyUnicode_WRITE(kind, buffer, i, *filler_codepoint);
 		}
 	}
-	
+
 	/*
 	 * Releasing the gil ASAP
 	 */
 	Py_DECREF(filler_codepoint);
 	Py_DECREF(filler);
 	PyGILState_Release(gilstate);
-	
+
 	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("GIL Released! - Returning!\n");
 	#endif
-	
+
 	if (PyUnicode_READY(str)){
 		PyErr_SetString(MemWiper_CoreError, "Postcheck: Unicode object is not Ready!");
 		PyGILState_Release(gilstate);
 		Py_RETURN_NONE;
 	}
-	
+
 	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("Post Ready check was OK!\n");
 	PySys_WriteStderr("Current hash: %ld\n", str_obj->hash);
 	#endif
-        
+
 	if (str_obj->hash != -1)
 		str_obj->hash = _Py_HashBytes(buffer, buffer_size*kind);
-	
+
 	#ifdef MEMWIPER_DEBUG
         PySys_WriteStderr("New hash: %ld\n", str_obj->hash);
 	#endif
@@ -152,7 +152,7 @@ int kind, refc;
  * Methods of the module declaration
  */
 static PyMethodDef MemWiper_CoreMethods[] = {
-	{"wipeit", memwiper_core_wipeit, METH_O, 
+	{"wipeit", memwiper_core_wipeit, METH_O,
 		PyDoc_STR("wipeit(s) -> str(\"\")\n\n\
 Clear the memory of the string passed as \
 parameter.\n\
@@ -160,8 +160,8 @@ Could raise TypeError if you use a parameter that is not a string.\n\
 Also could raise MemWiperError exception if the string is not in it \
 canonical representation, this usually never happen, but it MAY happen \
 under weird circumstances.\n\
-  :param s: The string you want to overwrite.\n\
-  :return: An empty string.")},
+:param s: The string you want to overwrite.\n\
+:return: An empty string.")},
 	{NULL, NULL, 0, NULL}
 };
 

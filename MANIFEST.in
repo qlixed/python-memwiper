@@ -12,6 +12,7 @@ include .readthedocs.yml
 include .flake8
 include bandit.yml
 include pyproject.toml
+include codecov.yml
 
 
 include AUTHORS.rst
