@@ -42,6 +42,6 @@ jobs:
         flags: unittests #optional
         name: codecov-umbrella #optional
     - name: Run codacy-analysis-cli
-        uses: mrfyda/codacy-analysis-cli-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      uses: mrfyda/codacy-analysis-cli-action@master
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
