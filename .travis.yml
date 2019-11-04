@@ -36,7 +36,7 @@ matrix:
       env:
         - TOXENV=py37-nocov
     - os: windows
-      language: generic
+      language: bash
       env:
         - TOXENV=py37-nocov
     - env:
@@ -52,10 +52,14 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       choco install python3
+      pip install pyenv-win --target $HOME/.pyenv
+      export PATH="$HOME/.pyenv/pyenv-win/bin:$HOME/.pyenv/pyenv-win/shims:$PATH"
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       python --version
+      eval "$(pyenv init -)"
+      pyenv rehash
       pyenv versions
       pyenv install 3.7-dev
       pyenv versions
