@@ -17,15 +17,14 @@ matrix:
     - env:
         - TOXENV={{ env }}{% if config.cover %},codecov{% endif %}
 {%- if env.startswith('pypy3') %}{{ '' }}
-        - TOXPYTHON=pypy3
+       - TOXPYTHON=pypy3
       python: 'pypy3'
 {%- elif env.startswith('pypy') %}{{ '' }}
       python: 'pypy'
 {%- else %}{{ '' }}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
 {%- endif %}
-{%- if 'py37' in env or 'py27' in env %}{{ '' }}
-  allow_failure:
+{%- if env in  ['py35', 'py36', 'py37', 'py38'] %}{{ '' }}
     - os: osx
       language: generic
       env:
