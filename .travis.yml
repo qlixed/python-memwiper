@@ -31,6 +31,14 @@ matrix:
     - env:
         - TOXENV=py37-nocov
       python: '3.7'
+    - os: osx
+      language: generic
+      env:
+        - TOXENV=py37-nocov
+    - os: windows
+      language: generic
+      env:
+        - TOXENV=py37-nocov
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
@@ -42,7 +50,11 @@ before_install:
   - uname -a
   - lsb_release -a || true
   - |
-    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
+      choco install python3
+    fi
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       python --version
       pyenv versions
       pyenv install 3.7-dev

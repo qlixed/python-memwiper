@@ -24,9 +24,13 @@ matrix:
 {%- else %}{{ '' }}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
 {%- endif %}
-{%- if env in  ['py35', 'py36', 'py37', 'py38'] %}{{ '' }}
+{%- if env in  ['py37-nocov'] %}{{ '' }}
     - os: osx
       language: generic
+      env:
+        - TOXENV={{ env }}
+    - os: windows
+      language: python
       env:
         - TOXENV={{ env }}
 {%- endif %}{{ '' }}
@@ -36,7 +40,11 @@ before_install:
   - uname -a
   - lsb_release -a || true
   - |
-    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
+      choco install python3
+    fi
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       python --version
       pyenv versions
       pyenv install 3.7-dev
