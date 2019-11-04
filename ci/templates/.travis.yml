@@ -60,8 +60,9 @@ before_install:
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
-  - rehash
   - easy_install --version
+  - whereis virtualenv || true
+  - which virtualenv
   - virtualenv --version
   - pip --version
   - tox --version
