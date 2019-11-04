@@ -33,6 +33,7 @@ matrix:
       language: bash
       env:
         - TOXENV={{ env }}
+        - LD_PRELOAD=
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
 before_install:

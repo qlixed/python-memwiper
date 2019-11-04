@@ -39,6 +39,7 @@ matrix:
       language: bash
       env:
         - TOXENV=py37-nocov
+        - LD_PRELOAD=
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
