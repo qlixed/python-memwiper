@@ -52,30 +52,27 @@ before_install:
   - lsb_release -a || true
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-      export LD_PRELOAD=
       choco install python3
+      python -m ensurepip
       pip install pyenv-win --target $HOME/.pyenv
       export PATH="$HOME/.pyenv/pyenv-win/bin:$HOME/.pyenv/pyenv-win/shims:$PATH"
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       python --version
+      which python
       eval "$(pyenv init -)"
       pyenv rehash
-      pyenv versions
       pyenv install 3.7-dev
-      pyenv versions
       pyenv global 3.7-dev
-      pyenv versions
       python --version
       which python
     fi
 install:
-  - python --version
-  - which python
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
-  - virtualenv --version
+  - rehash
   - easy_install --version
+  - virtualenv --version
   - pip --version
   - tox --version
 script:
