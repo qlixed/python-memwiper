@@ -58,7 +58,6 @@ before_install:
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-      export LD_PRELOAD=
       python --version
       eval "$(pyenv init -)"
       pyenv rehash
