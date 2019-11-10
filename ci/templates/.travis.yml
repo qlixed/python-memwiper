@@ -30,7 +30,7 @@ matrix:
       env:
         - TOXENV={{ env }}
     - os: windows
-      language: bash
+      language: generic
       env:
         - TOXENV={{ env }}
         - LD_PRELOAD=
