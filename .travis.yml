@@ -3,6 +3,7 @@ dist: xenial
 cache: false
 env:
   global:
+      if os == linux:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
 matrix:
@@ -51,12 +52,12 @@ before_install:
   - uname -a
   - lsb_release -a || true
   - |
-    if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-      choco install python3
-      choco install pip # as python -m ensurepip sometimes fails
-      pip install pyenv-win --target $HOME/.pyenv
-      export PATH="$HOME/.pyenv/pyenv-win/bin:$HOME/.pyenv/pyenv-win/shims:$PATH"
-    fi
+      if os = windows:
+        choco install python3 --params '/InstallDir:C:\python3'
+        set PATH='\%PATH\%;c:\python3'
+        echo 'Installed python base in \%PATH\%'
+        pip install pyenv-win --target c:\pyenv
+        set PATH="c:\pyenv\pyenv-win\bin:c:\pyenv\pyenv-win\shims:\PATH\%"
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
       python --version
@@ -77,7 +78,7 @@ install:
   - pip --version
   - tox --version
 script:
-  - tox -v
+    - tox -v
 after_failure:
   - more .tox/log/* | cat
   - more .tox/*/log/* | cat
