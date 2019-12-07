@@ -1,11 +1,12 @@
 language: python
+os: linux
 dist: xenial
 cache: false
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
-matrix:
+jobs:
   include:
     - python: '3.6'
       env:
@@ -53,8 +54,7 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
         choco install python --params '/quiet /InstallDir:C:\\python3 /Include_doc 0 /PrependPath 1'
-        refreshenv  # To refresh PATH changes made by python installation.
-        pip install pyenv-win --target '/c/pyenv'
+        pip3 install pyenv-win --target '/c/pyenv'
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
