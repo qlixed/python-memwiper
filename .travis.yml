@@ -37,7 +37,7 @@ matrix:
       env:
         - TOXENV=py37-nocov
     - os: windows
-      language: generic
+      language: shell
       env:
         - TOXENV=py37-nocov
         - LD_PRELOAD=
