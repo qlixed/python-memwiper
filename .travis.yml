@@ -53,6 +53,7 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
         choco install python --params '/quiet /InstallDir:C:\\python3 /Include_doc 0 /PrependPath 1'
+        refreshenv  # To refresh PATH changes made by python installation.
         pip install pyenv-win --target '/c/pyenv'
     fi
   - |
