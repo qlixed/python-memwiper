@@ -63,8 +63,9 @@ before_install:
         $PYTHON_HOME/python37 --version
         echo ""
         sleep 1
-        pip3 install --upgrade pytest
-        pip3 install codecov
+        ls -lR $PYTHON_HOME
+        #pip3 install --upgrade pytest
+        #pip3 install codecov
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
