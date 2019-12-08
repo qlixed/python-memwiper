@@ -49,37 +49,15 @@ before_install:
         choco install python --version "$PYTHON_VERS"
         echo ""
         echo ""
-        echo ""
-        echo ""
         export PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
         echo ""
         echo ""
         python --version
         echo ""
         echo ""
-        $PYTHON_HOME/python --version
-        echo ""
-        echo ""
-        $PYTHON_HOME/python.exe --version
-        echo ""
-        echo ""
-        $PYTHON_HOME/python3 --version
-        echo ""
-        echo ""
-        $PYTHON_HOME/python3.exe --version
-        echo ""
-        echo ""
-        sleep 1
         pip --version
-        pip3 --version
         echo ""
         echo ""
-        $PYTHON_HOME/pip --version
-        $PYTHON_HOME/pip3 --version
-        echo ""
-        echo ""
-        $PYTHON_HOME/pip.exe --version
-        $PYTHON_HOME/pip3.exe --version
         #pip3 install --upgrade pytest
         #pip3 install codecov
     fi
