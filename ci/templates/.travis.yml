@@ -43,14 +43,8 @@ before_install:
   - lsb_release -a || true
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-        choco install python --params /quiet /InstallDir:C:\\python3 /Include_doc 0 /PrependPath 1
-        python --version
+        python -m ensurepip
         python -m pip install pyenv-win --target /c/pyenv
-        python3 --version
-        python3 -m pip install pyenv-win --target /c/pyenv
-        find / -name pip
-        find / -name pip3
-        pip3 install pyenv-win --target /c/pyenv
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
