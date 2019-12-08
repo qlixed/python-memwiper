@@ -36,7 +36,7 @@ jobs:
         - TOXENV={{ env }}
         - LD_PRELOAD=
         - PYTHON_VERS={{ "{0[2]}.{0[3]}".format(env) }}
-        - PYTHON_HOME=/c/Python$PYTHON_VERS
+        - PYTHON_HOME=/c/Python${{ "{0[2]}{0[3]}".format(env) }}
         - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
