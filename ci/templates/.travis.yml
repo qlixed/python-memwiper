@@ -40,8 +40,8 @@ jobs:
         - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
-    allow_failures:
-        os: windows
+  allow_failures:
+    os: windows
 before_install:
   - python --version
   - uname -a

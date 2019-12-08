@@ -50,8 +50,8 @@ jobs:
         - PYTHON_VERS=3.8
         - PYTHON_HOME=/c/Python38
         - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
-    allow_failures:
-        os: windows
+  allow_failures:
+    os: windows
 before_install:
   - python --version
   - uname -a
