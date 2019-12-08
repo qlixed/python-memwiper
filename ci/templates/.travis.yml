@@ -56,9 +56,11 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
       eval "$(pyenv init -)"
+      pyenv rehash
       pyenv install "$PYTHON_VERS"-dev
       pyenv global "$PYTHON_VERS"-dev
       python --version
+      pip --version
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
