@@ -1,6 +1,5 @@
 language: python
 os: linux
-dist: xenial
 cache: false
 env:
   global:
@@ -32,24 +31,27 @@ jobs:
     - env:
         - TOXENV=py37-nocov
       python: '3.7'
-    - os: osx
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: windows
-      language: shell
-      env:
-        - TOXENV=py37-nocov
-        - LD_PRELOAD=
-        - PYTHON_VERS=3.7
-        - PYTHON_HOME=/c/Python37
-        - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
     - env:
         - TOXENV=py38-nocov
       python: '3.8'
+    - os: osx
+      language: generic
+      env:
+        - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
+    - os: windows
+      language: shell
+      env:
+        - TOXENV=py38-nocov
+        - LD_PRELOAD=
+        - PYTHON_VERS=3.8
+        - PYTHON_HOME=/c/Python38
+        - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
+    allow_failures:
+        os: windows
 before_install:
   - python --version
   - uname -a
@@ -57,32 +59,20 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
         choco install python --version "$PYTHON_VERS"
-        echo ""
-        echo ""
         export PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
-        echo ""
-        echo ""
         python --version
-        echo ""
-        echo ""
         pip --version
-        echo ""
-        echo ""
-        #pip3 install --upgrade pytest
-        #pip3 install codecov
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
       eval "$(pyenv init -)"
-      pyenv install 3.7-dev
-      pyenv global 3.7-dev
+      pyenv install "$PYTHON_VERS"-dev
+      pyenv global "$PYTHON_VERS"-dev
       python --version
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
   - easy_install --version
-  - whereis virtualenv || true
-  - which virtualenv
   - virtualenv --version
   - pip --version
   - tox --version
