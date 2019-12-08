@@ -55,12 +55,11 @@ before_install:
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
         choco install python --params /quiet /InstallDir:C:\\python3 /Include_doc 0 /PrependPath 1
         python --version
+        python -m pip install pyenv-win --target /c/pyenv
         python3 --version
         python3 -m pip install pyenv-win --target /c/pyenv
-        whereis pip
-        whereis pip3
-        find -name pip /
-        find -name pip3 /
+        find / -name pip
+        find / -name pip3
         pip3 install pyenv-win --target /c/pyenv
     fi
   - |
