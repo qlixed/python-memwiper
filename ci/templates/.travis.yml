@@ -35,7 +35,9 @@ jobs:
       env:
         - TOXENV={{ env }}
         - LD_PRELOAD=
-        - PATH=/c/Python38:/c/Python38/Scripts:$PATH
+        - PYTHON_VERS={{ "{0[2]}.{0[3]}".format(env) }}
+        - PYTHON_HOME=/c/Python$PYTHON_VERS
+        - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
 before_install:
@@ -44,25 +46,18 @@ before_install:
   - lsb_release -a || true
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-        echo "$PATH"
-        export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
-        choco install python
+        choco install python --version "$PYTHON_VERS"
         python --version
-        python -m pip install --upgrade pip
         python3 --version
-        python3 -m pip install --upgrade pip
         pip3 install --upgrade pytest
         pip3 install codecov
     fi
   - |
-    if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-      python -c "import os, sys;print(os.path.dirname(sys.executable))"
-      which python
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
       eval "$(pyenv init -)"
       pyenv install 3.7-dev
       pyenv global 3.7-dev
       python --version
-      which python
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
