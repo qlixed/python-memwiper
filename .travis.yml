@@ -53,12 +53,15 @@ before_install:
   - lsb_release -a || true
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-        python -m ensurepip --user
-        python -m pip install pyenv-win --target /c/pyenv
+        echo "%USERPROFILE%"
+        echo "$USERPROFILE"
+        echo "$HOME"
+        git clone https://github.com/pyenv-win/pyenv-win.git "$HOME/.pyenv"
+        set PYENV="$HOME/.pyenv"
+        set PATH="$PYENV/bin:$PYENV/shims:$PATH"
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-      python --version
       which python
       eval "$(pyenv init -)"
       pyenv rehash
