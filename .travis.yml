@@ -57,10 +57,10 @@ before_install:
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
         choco install python --version "$PYTHON_VERS"
-        echo "\n\n$PATH\n\n"
         python --version
-        python3 --version
-        python37 --version
+        $PYTHON_HOME/python --version
+        $PYTHON_HOME/python3 --version
+        $PYTHON_HOME/python37 --version
         echo ""
         sleep 1
         pip3 install --upgrade pytest
