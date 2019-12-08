@@ -42,7 +42,7 @@ jobs:
         - TOXENV=py37-nocov
         - LD_PRELOAD=
         - PYTHON_VERS=3.7
-        - PYTHON_HOME=/c/Python$37
+        - PYTHON_HOME=/c/Python37
         - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
     - env:
         - TOXENV=py38-cover,codecov
