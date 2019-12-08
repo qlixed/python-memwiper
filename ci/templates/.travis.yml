@@ -43,18 +43,17 @@ before_install:
   - lsb_release -a || true
   - |
     if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
-        echo "%USERPROFILE%"
-        echo "$USERPROFILE"
-        echo "$HOME"
+        python -c "import os, sys;print(os.path.dirname(sys.executable))"
+        choco search python
         git clone https://github.com/pyenv-win/pyenv-win.git "$HOME/.pyenv"
-        set PYENV="$HOME/.pyenv"
-        set PATH="$PYENV/bin:$PYENV/shims:$PATH"
+        export PYENV="$HOME/.pyenv"
+        export PATH="$PYENV/bin:$PYENV/shims:$PATH"
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]] || [[ $TRAVIS_OS_NAME == 'windows' ]]; then
+      python -c "import os, sys;print(os.path.dirname(sys.executable))"
       which python
       eval "$(pyenv init -)"
-      pyenv rehash
       pyenv install 3.7-dev
       pyenv global 3.7-dev
       python --version
