@@ -51,8 +51,7 @@ jobs:
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
   allow_failures:
-  - env: TOXENV=docs
-  - os: windows
+    os: windows
 before_install:
   - python --version
   - uname -a
