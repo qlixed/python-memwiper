@@ -24,22 +24,12 @@ jobs:
 {%- else %}{{ '' }}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
 {%- endif %}{{ '' }}
+{%- if env in  ['py38-nocov'] %}{{ '' }}
     - os: osx
       osx_image: xcode11.2
       language: generic
       env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
-{%- if env in  ['py38-nocov'] %}{{ '' }}
+        - TOXENV={{ env }}
     - os: windows
       language: shell
       env:
@@ -65,9 +55,12 @@ before_install:
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    #brew install pyenv
+      eval "$(pyenv init -)"
+      pyenv install "$PYTHON_VERS"-dev
+      pyenv global "$PYTHON_VERS"-dev
       python --version
       pip --version
-      export TOXENV="py$(python -c 'import sys;print(\'{0}{1}\'.format(sys.version_info.major, sys.version_info.minor))')-nocov"
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt

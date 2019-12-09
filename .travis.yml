@@ -16,129 +16,24 @@ jobs:
     - env:
         - TOXENV=py35-cover,codecov
       python: '3.5'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py35-nocov
       python: '3.5'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py36-cover,codecov
       python: '3.6'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py36-nocov
       python: '3.6'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py37-cover,codecov
       python: '3.7'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py37-nocov
       python: '3.7'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
-    - os: osx
-      osx_image: xcode11.2
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
     - env:
         - TOXENV=py38-nocov
       python: '3.8'
@@ -146,17 +41,7 @@ jobs:
       osx_image: xcode11.2
       language: generic
       env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode10.1
-      language: generic
-      env:
-        - TOXENV=py37-nocov
-    - os: osx
-      osx_image: xcode9.4
-      language: generic
-      env:
-        - TOXENV=py35-nocov
+        - TOXENV=py38-nocov
     - os: windows
       language: shell
       env:
@@ -180,9 +65,12 @@ before_install:
     fi
   - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    #brew install pyenv
+      eval "$(pyenv init -)"
+      pyenv install "$PYTHON_VERS"-dev
+      pyenv global "$PYTHON_VERS"-dev
       python --version
       pip --version
-      export TOXENV="py$(python -c 'import sys;print(\'{0}{1}\'.format(sys.version_info.major, sys.version_info.minor))')-nocov"
     fi
 install:
   - python -mpip install --progress-bar=off tox -r ci/requirements.txt
