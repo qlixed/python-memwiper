@@ -43,6 +43,18 @@ jobs:
       env:
         - TOXENV=py38-nocov
         - PYTHON_VERS=3.8
+    - os: osx
+      osx_image: xcode10.1
+      language: generic
+      env:
+        - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
+    - os: osx
+      osx_image: xcode9.2
+      language: generic
+      env:
+        - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
     - os: windows
       language: shell
       env:
