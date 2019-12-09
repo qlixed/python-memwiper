@@ -15,7 +15,8 @@ jobs:
         - TOXENV=docs
     - env:
         - TOXENV=py35-cover,codecov
-      python: '3.5'    - os: osx
+      python: '3.5'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -32,7 +33,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py35-nocov
-      python: '3.5'    - os: osx
+      python: '3.5'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -49,7 +51,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py36-cover,codecov
-      python: '3.6'    - os: osx
+      python: '3.6'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -66,7 +69,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py36-nocov
-      python: '3.6'    - os: osx
+      python: '3.6'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -83,7 +87,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py37-cover,codecov
-      python: '3.7'    - os: osx
+      python: '3.7'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -100,7 +105,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py37-nocov
-      python: '3.7'    - os: osx
+      python: '3.7'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -117,7 +123,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py38-cover,codecov
-      python: '3.8'    - os: osx
+      python: '3.8'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:
@@ -134,7 +141,8 @@ jobs:
         - TOXENV=py35-nocov
     - env:
         - TOXENV=py38-nocov
-      python: '3.8'    - os: osx
+      python: '3.8'
+    - os: osx
       osx_image: xcode11.2
       language: generic
       env:

@@ -23,7 +23,7 @@ jobs:
       python: 'pypy'
 {%- else %}{{ '' }}
       python: '{{ "{0[2]}.{0[3]}".format(env) }}'
-{%- endif %}
+{%- endif %}{{ '' }}
     - os: osx
       osx_image: xcode11.2
       language: generic
