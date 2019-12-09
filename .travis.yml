@@ -86,7 +86,12 @@ before_install:
       pip --version
     fi
 install:
-  - python -mpip install --progress-bar=off tox -r ci/requirements.txt
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+        python -mpip install tox -r ci/requirements.txt
+    else
+        python -mpip install --progress-bar=off tox -r ci/requirements.txt
+    fi
   - easy_install --version
   - virtualenv --version
   - pip --version
