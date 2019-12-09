@@ -42,6 +42,7 @@ jobs:
       language: generic
       env:
         - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
     - os: windows
       language: shell
       env:

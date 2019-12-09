@@ -30,6 +30,7 @@ jobs:
       language: generic
       env:
         - TOXENV={{ env }}
+        - PYTHON_VERS={{ "{0[2]}.{0[3]}".format(env) }}
     - os: windows
       language: shell
       env:
