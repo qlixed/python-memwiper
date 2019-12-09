@@ -51,8 +51,9 @@ jobs:
 {%- endif %}{{ '' }}
 {%- endfor %}{{ '' }}
   allow_failures:
-    os: windows
-    env: TOXENV=docs
+    env:
+      - TOXENV=docs
+      - TOXENV=py38-nocov
 before_install:
   - python --version
   - uname -a

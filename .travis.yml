@@ -158,8 +158,9 @@ jobs:
         - PYTHON_HOME=/c/Python38
         - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
   allow_failures:
-    os: windows
-    env: TOXENV=docs
+    env:
+      - TOXENV=docs
+      - TOXENV=py38-nocov
 before_install:
   - python --version
   - uname -a
