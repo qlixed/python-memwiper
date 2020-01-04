@@ -4,15 +4,13 @@ graft ci
 graft tests
 
 include .bumpversion.cfg
-include .coveragerc
 include .cookiecutterrc
 include .editorconfig
-include .isort.cfg
-include .readthedocs.yml
 include .flake8
-include bandit.yml
-include pyproject.toml
 include codecov.yml
+include pytest.ini
+include pyproject.toml
+include readthedocs.yml
 
 
 include AUTHORS.rst

@@ -59,3 +59,18 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.coverage.paths]
+source = ['src']
+
+[tool.coverage.run]
+branch = true
+source = ['src', 'tests']
+parallel = true
+omit = ['src/memwiper/utils/_coretest.py']
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+omit = ['*migrations*']
+

@@ -1,6 +1,5 @@
-import pytest  # noqa: F401
-
 import memwiper
+import pytest
 
 
 def make_str(the_char, length):
