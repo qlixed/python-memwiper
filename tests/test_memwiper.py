@@ -1,5 +1,5 @@
-import memwiper
 import pytest
+import memwiper
 
 
 def make_str(the_char, length):

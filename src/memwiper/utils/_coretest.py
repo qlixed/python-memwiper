@@ -1,11 +1,11 @@
-import codecs
-import getpass
-import multiprocessing
 import os
-import platform
 import shlex
+import codecs
 import shutil
+import getpass
+import platform
 import subprocess
+import multiprocessing
 from sys import exit as sysexit
 
 import memwiper
