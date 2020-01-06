@@ -1,11 +1,11 @@
 language: python
-dist: xenial
+os: linux
 cache: false
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
-matrix:
+jobs:
   include:
     - python: '3.6'
       env:
@@ -28,46 +28,66 @@ matrix:
     - env:
         - TOXENV=py37-cover,codecov
       python: '3.7'
-  allow_failure:
-    - os: osx
-      language: generic
-      env:
-        - TOXENV=py37-cover
     - env:
         - TOXENV=py37-nocov
       python: '3.7'
-  allow_failure:
-    - os: osx
-      language: generic
-      env:
-        - TOXENV=py37-nocov
     - env:
         - TOXENV=py38-cover,codecov
       python: '3.8'
     - env:
         - TOXENV=py38-nocov
       python: '3.8'
+    - os: osx
+      osx_image: xcode11.2
+      language: generic
+      env:
+        - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
+    - os: osx
+      osx_image: xcode10.1
+      language: generic
+      env:
+        - TOXENV=py38-nocov
+        - PYTHON_VERS=3.8
+    - os: windows
+      language: shell
+      env:
+        - TOXENV=py38-nocov
+        - LD_PRELOAD=
+        - PYTHON_VERS=3.8
+        - PYTHON_HOME=/c/Python38
+        - PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
+  allow_failures:
+    os: windows
 before_install:
   - python --version
   - uname -a
   - lsb_release -a || true
   - |
+    if [[ $TRAVIS_OS_NAME == 'windows' ]]; then
+        choco install python --version "$PYTHON_VERS"
+        export PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
+        python --version
+        pip --version
+    fi
+  - |
     if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    #brew install pyenv
+      eval "$(pyenv init -)"
+      pyenv install "$PYTHON_VERS"-dev
+      pyenv global "$PYTHON_VERS"-dev
       python --version
-      pyenv versions
-      pyenv install 3.7-dev
-      pyenv versions
-      pyenv global 3.7-dev
-      pyenv versions
-      python --version
-      which python
+      pip --version
     fi
 install:
-  - python --version
-  - which python
-  - python -mpip install --progress-bar=off tox -r ci/requirements.txt
-  - virtualenv --version
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+        python -mpip install tox -r ci/requirements.txt
+    else
+        python -mpip install --progress-bar=off tox -r ci/requirements.txt
+    fi
   - easy_install --version
+  - virtualenv --version
   - pip --version
   - tox --version
 script:
